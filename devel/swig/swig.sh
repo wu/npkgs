@@ -8,11 +8,11 @@ URL="http://easynews.dl.sourceforge.net/sourceforge/swig/$TARBALL"
 #PREREQS="perl ruby python make"
 PREREQS="perl make"
 
-export CC=gcc
-export MAKE=gmake
-
 # source common envs
 . ../../common.sh
+
+export CC=gcc
+export MAKE=gmake
 
 #CONFIGURE="$CONFIGURE --with-perl5=$PREFIX/bin/perl --with-ruby=$PREFIX/bin/ruby --with-python=$PREFIX/bin/python"
 CONFIGURE="$CONFIGURE --with-perl5=$PREFIX/bin/perl"
