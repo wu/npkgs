@@ -149,3 +149,47 @@ function common_patch
     /usr/bin/gpatch < "$PATCHDIR/$PATCH" || exit
     echo APPLIED!
 }
+
+function common_install_links
+{
+    if [ -z "$PKG_PREFIX" ]; then
+      echo "ERROR: PKG_PREFIX not set!"
+      return;
+    fi
+
+    if [ -z "$PKG_NAME" ]; then
+      echo "ERROR: PKG_NAME not set!"
+      return;
+    fi
+
+  (
+    cd $NPKG_PREFIX/root
+    rm $PKG_NAME
+    ln -s $PKG_PREFIX $PKG_NAME
+
+    PKG_DIR="`pwd`/$PKG_NAME"
+
+    print "CHECKING FOR FILES IN: $NPKG_PREFIX/root/$PKG_NAME/"
+    for file in $(find $PKG_NAME/)
+    do
+      if [ -d "$file" ]; then
+          file="${file#$PKG_NAME/}"
+          if [ ! -d "$NPKG_PREFIX/$file" ]; then
+            echo "$NPKG_PREFIX/$file"
+            mkdir -p "$NPKG_PREFIX/$file"
+          fi
+      else
+          file="${file#$PKG_NAME/}"
+          PKG_PREFIX="${PKG_PREFIX%/}"
+          if [ -r "$NPKG_PREFIX/$file" ]; then
+	      echo "REPLACING WITH LINK: $NPKG_PREFIX/$file"
+              rm  $NPKG_PREFIX/$file
+          fi
+          ln -s $PKG_DIR/$file $NPKG_PREFIX/$file
+      fi
+
+    done
+  )
+}
+
+
