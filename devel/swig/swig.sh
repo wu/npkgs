@@ -8,7 +8,7 @@ URL="http://easynews.dl.sourceforge.net/sourceforge/swig/$TARBALL"
 #PREREQS="perl ruby python make"
 PREREQS="perl make"
 
-#export CC=gcc
+export CC=gcc
 export MAKE=gmake
 
 # source common envs
