@@ -4,13 +4,16 @@ PKG_NAME="openssl"
 PACKAGE="$PKG_NAME-0.9.8j"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.openssl.org/source/$TARBALL"
+PREREQS="make"
+
+export MAKE=gmake
 
 # source common envs
 . ../../common.sh
 
 if [ -z "$OPENSSL_TARGET" ]; then
     echo "ERROR: OPENSSL_TARGET is not set in your environment"
-    echo "RECOMMEND SETTING IT IN: $NPKG_PREFIX/common/host/$HOST_SHORT.sh"
+    echo "RECOMMEND SETTING IT IN: $NPKG_PATH/common/host/$HOST_SHORT.sh"
     exit 1;
 
 fi
@@ -33,3 +36,4 @@ common_make
 common_install
 common_install
 common_install_links
+

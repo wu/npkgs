@@ -169,7 +169,8 @@ function common_install_links
 
     PKG_DIR="`pwd`/$PKG_NAME"
 
-    print "CHECKING FOR FILES IN: $NPKG_PREFIX/root/$PKG_NAME/"
+    echo
+    echo "CHECKING FOR FILES IN: $NPKG_PREFIX/root/$PKG_NAME/"
     for file in $(find $PKG_NAME/)
     do
       if [ -d "$file" ]; then
