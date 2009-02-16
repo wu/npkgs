@@ -66,7 +66,7 @@ if [ -z "$PKG_PREFIX" ]; then
 fi
 
 echo
-echo "INSTALLING INTO: $PKG_PREFIX..."
+echo "INSTALLING INTO: $PKG_PREFIX"
 echo
 sleep 1;
     
