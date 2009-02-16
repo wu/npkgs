@@ -8,6 +8,8 @@ URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
 # source common envs
 . ../../common.sh
 
+CONFIGURE="$CONFIGURE --with-x"
+
 common_fetch
 common_prereqs
 common_clean
