@@ -14,10 +14,11 @@ fi
 
 # where to install stuff
 if [ ! -z "$NPKG_PREFIX" ]; then
-    echo "INSTALLING INTO DEFAULT NPKG_PREFIX: /usr/local, override with NPKG_PREFIX env var"
+    echo "INSTALLING INTO SPECIFIED NPKG_PREFIX: $NPKG_PREFIX"
     export PREFIX="$NPKG_PREFIX";
 fi
 if [ -z $PREFIX ]; then
+    echo "INSTALLING INTO DEFAULT PREFIX: /usr/local, override with NPKG_PREFIX env var"
     export PREFIX="/usr/local"
 fi
 if [ ! -d $PREFIX ]; then
