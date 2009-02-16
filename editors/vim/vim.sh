@@ -5,6 +5,8 @@ PACKAGE="$PKG_NAME-7.2"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://ftp.vim.org/pub/vim/unix/$TARBALL"
 
+export MAKE=gmake
+
 # source common envs
 . ../../common.sh
 
