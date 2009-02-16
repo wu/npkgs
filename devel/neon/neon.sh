@@ -9,7 +9,8 @@ PREREQS="openssl"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-ssl=openssl --with-libs=$PREFIX --enable-shared=yes"
+#CONFIGURE="$CONFIGURE --with-ssl=openssl --with-libs=$PREFIX --enable-shared=yes"
+CONFIGURE="$CONFIGURE --with-ssl=openssl --with-libs=$PREFIX"
 
 common_fetch
 common_prereqs
