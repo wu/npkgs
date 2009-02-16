@@ -18,7 +18,7 @@ if [ -z "$OPENSSL_TARGET" ]; then
 
 fi
 
-CONFIGURE="./Configure --prefix=$PKG_PREFIX $OPENSSL_TARGET"
+CONFIGURE="./Configure shared --prefix=$PKG_PREFIX $OPENSSL_TARGET"
 
 common_fetch
 common_prereqs
@@ -36,4 +36,5 @@ common_make
 common_install
 common_install
 common_install_links
+
 
