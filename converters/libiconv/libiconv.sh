@@ -4,9 +4,12 @@ PKG_NAME="libiconv"
 PACKAGE="$PKG_NAME-1.12"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/libiconv/$TARBALL"
+PREREQS="make"
 
 # source common envs
 . ../../common.sh
+
+export MAKE=gmake
 
 common_fetch
 common_prereqs
