@@ -164,7 +164,7 @@ function common_install_links
 
   (
     cd $NPKG_PREFIX/root
-    rm $PKG_NAME
+    rm $PKG_NAME 2>/dev/null
     ln -s $PKG_PREFIX $PKG_NAME
 
     PKG_DIR="`pwd`/$PKG_NAME"

@@ -121,15 +121,15 @@ if [ ! -d $DISTFILES ]; then
 fi
 
 # build options
-export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
-export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
-export CFLAGS="$CFLAGS -I$PREFIX/include"
-export CXXFLAGS="$CXXFLAGS -I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
+export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
+export CFLAGS="-I$PREFIX/include $CFLAGS"
+export CXXFLAGS="-I$PREFIX/include $CXXFLAGS"
 
 # add ncurses directory to include path if it exist
 if [ -d $PREFIX/include/ncurses ]; then
-    export CPPFLAGS="$CPPFLAGS -I$PREFIX/include/ncurses"
+    export CPPFLAGS="-I$PREFIX/include/ncurses $CPPFLAGS"
 fi
 
 
-
+export LD_RUN_PATH=$PREFIX
