@@ -4,12 +4,14 @@ PKG_NAME="subversion"
 PACKAGE="$PKG_NAME-1.5.5"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://subversion.tigris.org/downloads/$TARBALL"
-PREREQS="swig apr-1 apr-util neon libiconv apache"
+#PREREQS="swig apr-1 apr-util neon libiconv apache"
+PREREQS="swig apr-1 apr-util neon libiconv"
 
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-apxs=$PREFIX/bin/apxs --with-neon=$PREFIX --with-swig=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX --without-sasl --with-ssl=$PREFIX"
+#CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-apxs=$PREFIX/bin/apxs --with-neon=$PREFIX --with-swig=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX --without-sasl --with-ssl=$PREFIX"
+CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-neon=$PREFIX --with-swig=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX --without-sasl --with-ssl=$PREFIX"
 
 common_fetch
 common_prereqs
