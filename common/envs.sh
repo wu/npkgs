@@ -43,9 +43,9 @@ fi
 
 # hostname specific overrides
 HOST_SHORT=${HOST%%.*}
-echo "CHECKING FOR: $NPKG_PATH/common/hosts/$HOST_SHORT.sh"
-if [ -r "$NPKG_PATH/common/hosts/$HOST_SHORT.sh" ]; then
-  . "$NPKG_PATH/common/hosts/$HOST_SHORT.sh"
+echo "CHECKING FOR: $NPKG_PATH/common/host/$HOST_SHORT.sh"
+if [ -r "$NPKG_PATH/common/host/$HOST_SHORT.sh" ]; then
+  . "$NPKG_PATH/common/host/$HOST_SHORT.sh"
 fi
 
 
