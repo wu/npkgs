@@ -1,6 +1,6 @@
 
 
-if [ ! -z "/opt/dtbld/bin/env.sh" ];
+if [ ! -r "/opt/dtbld/bin/env.sh" ];
 then
   echo ERROR you must install the sun gnone desktop build first!
   exit 1
