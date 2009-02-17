@@ -38,7 +38,12 @@ cd $PACKAGE                          || exit
 
 common_configure
 common_make
+
+# must set for testing purposes or we get an error testing archive libs
+echo "set LD_LIBRARY_PATH for testing"
+export LD_LIBRARY_PATH=`pwd`
 common_test
+
 common_install
 common_install_links
 
