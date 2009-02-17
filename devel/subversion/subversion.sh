@@ -10,8 +10,9 @@ PREREQS="swig apr-1 apr-util neon libiconv"
 # source common envs
 . ../../common.sh
 
-#CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-apxs=$PREFIX/bin/apxs --with-neon=$PREFIX --with-swig=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX --without-sasl --with-ssl=$PREFIX"
-CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-neon=$PREFIX --with-swig=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX --without-sasl --with-ssl=$PREFIX"
+CONFIGURE="$CONFIGURE --disable-berkeley-db PERL=$PERL --with-neon=$PREFIX/root/neon --with-swig=$PREFIX/root/swig --with-apr=$PREFIX/root/apr-1 --with-apr-util=$PREFIX/root/apr-util --without-sasl --with-ssl=$PREFIX/root/openssl"
+
+# todo:               --with-apxs=$PREFIX/apache/bin/apxs
 
 common_fetch
 common_prereqs
