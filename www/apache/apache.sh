@@ -8,12 +8,13 @@ URL="http://archive.apache.org/dist/httpd/$TARBALL"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --enable-cgid --enable-dav-fs --enable-dav \
-                      --enable-deflate --enable-expires --disable-userdir \
-                      --enable-rewrite --enable-headers \
-                      --enable-proxy --disable-ipv6"
+CONFIGURE="$CONFIGURE --enable-mods-shared=all --enable-cgid \
+                      --enable-dav-fs --enable-dav --enable-deflate \
+                      --enable-expires --disable-userdir --enable-rewrite \
+                      --enable-proxy --enable-nonportable-atomics \
+                      --with-included-apr --enable-cgi \
+                      --with-mpm=worker --with-ssl=$PREFIX/root/openssl "
 
-# --enable-ssl --with-ssl=$PREFIX
 
 common_fetch
 common_prereqs
