@@ -4,7 +4,7 @@ PKG_NAME="neon"
 PACKAGE="$PKG_NAME-0.28.3"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.webdav.org/neon/$TARBALL"
-PREREQS="openssl expat binutils"
+PREREQS="openssl expat"
 
 # source common envs
 . ../../common.sh
