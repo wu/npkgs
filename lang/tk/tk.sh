@@ -4,6 +4,7 @@ PKG_NAME="tk"
 PACKAGE="${PKG_NAME}8.5.6"
 TARBALL="$PACKAGE-src.tar.gz"
 URL="http://superb-west.dl.sourceforge.net/sourceforge/tcl/$TARBALL"
+PREREQS="tcl"
 
 # source common envs
 . ../../common.sh
