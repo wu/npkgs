@@ -67,7 +67,36 @@ production machines.  In such cases, you can can easily pick and
 choose which packages to install on which machines by simply not
 copying those package's directories.
 
+INSTALLING
 
+1. clone the git project
+
+  cd /home/me
+  git clone git://github.com/wu/wuports.git
+
+2. set up some environment variables
+
+  export NPKG_PREFIX="/usr/foo"
+  export NPKG_PATH="/home/me/wuports"
+  export PATH="/usr/foo/bin:/usr/foo/sbin:$PATH"
+
+3. set up any custom config for your host or O/S (see the examples)
+
+   $NPKG_PATH/common/os/MyOS/default.sh
+   $NPKG_PATH/common/os/MyOS/version.sh
+   $NPKG_PATH/common/host/shorthostname.sh
+
+4. install c compiler(s) on your system
+
+  - os x - install developer tools, gcc
+  - solaris 10 - install gcc and sun compiler
+  - open solaris - install sun compiler
+    - for media apps, install sun common build environment
+
+5. start building
+
+  cd $NPKG_PATH/devel/git
+  ./git.sh
 
 
 
