@@ -19,9 +19,9 @@ number of external dependencies is kept as low as possible.  This
 minimized the amount of customization that has to be done on each
 machine.
 
-Second, you will choose a prefix where you want the packages
-installed (your PREFIX).  You could choose /usr/local, or you could just as easily
-choose /foo.  Once you make up your mind, you will need to add
+Second, you will choose a prefix where you want the packages installed
+(your PREFIX).  You could choose /usr/local, or you could just as
+easily choose /foo.  Once you make up your mind, you will need to add
 /foo/bin and /foo/sbin to your PATH.
 
 Third, every package is installed into it's own version-specific
@@ -54,7 +54,7 @@ it also gives you the flexibility to select a different version of a
 package if you prefer.  For example, if you wanted to use the foo-2.0
 version of foo.pl, you could simply set your path up like so:
 
-  export PATH="$PREFIX/root/foo-2.0/bin:PREFIX/bin:$PATH"
+  export PATH="$PREFIX/root/foo-2.0/bin:$PREFIX/bin:$PATH"
 
 This works great for testing out new packages without having to remove
 the old ones.  It also means that you can instantly look at any file
