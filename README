@@ -1,0 +1,74 @@
+I work on many machines running several unix-like operating systems,
+and I want a consistent set of tools on each of them.  This project
+contains a set of build scripts to build all my favorite unix tools
+(gnu ls, wget, curl, screen, git, subversion, perl, apache, etc).,
+with all my favorite options (e.g. 256 color terminal support)
+compiled so they work well together (e.g. apache mod_svn and git-svn).
+
+The goal of this project is to create a simple ports-tree like system
+that works on any unix-like operating system.  At the moment I am
+testing heavily on OS X, Open Solaris, and Solaris 10.
+
+There are some amazing package management systems out there for a
+number of operating systems.  I chose to do a number of things
+different.
+
+First, the assumption is that you are not building or installing these
+packages as root.  Some of the prerequs may require root, but the
+number of external dependencies is kept as low as possible.  This
+minimized the amount of customization that has to be done on each
+machine.
+
+Second, you will choose a prefix where you want the packages
+installed (your PREFIX).  You could choose /usr/local, or you could just as easily
+choose /foo.  Once you make up your mind, you will need to add
+/foo/bin and /foo/sbin to your PATH.
+
+Third, every package is installed into it's own version-specific
+directory.  That's right, nothing gets installed directly into
+PREFIX/bin.  Instead foo-1.0 will be installed into
+PREFIX/root/foo-1.0.  This makes it very natural to have multiple
+versions of any package installed at the same time.  A symlink will be
+created at PREFIX/root/foo to point to the one you want selected by
+default.
+
+  PREFIX/
+         root/
+              foo-1.0
+              foo-1.2
+              foo-2.0
+              foo      => foo-1.2
+
+Then, all files in the directory tree selected by the 'foo' symlink
+will be overlayed back into PREFIX.  For example, the file:
+
+  PREFIX/foo/bin/foo.pl
+
+would get symlinked back to simply:
+
+  PREFIX/bin/foo.pl
+
+This allows you to simply have PREFIX/bin in your path without needing
+to have the bin directory of every package you have installed.  Otoh,
+it also gives you the flexibility to select a different version of a
+package if you prefer.  For example, if you wanted to use the foo-2.0
+version of foo.pl, you could simply set your path up like so:
+
+  export PATH="$PREFIX/root/foo-2.0/bin:PREFIX/bin:$PATH"
+
+This works great for testing out new packages without having to remove
+the old ones.  It also means that you can instantly look at any file
+in $PREFIX and know exactly what package it came from (where does the
+symlink point?).
+
+This is especially good if you tend to do all your compiling on a
+single machine and then replicate that directory out to your
+production machines.  In such cases, you can can easily pick and
+choose which packages to install on which machines by simply not
+copying those package's directories.
+
+
+
+
+
+
