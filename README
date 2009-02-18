@@ -1,9 +1,9 @@
 I work on many machines running several unix-like operating systems,
-and I want a consistent set of tools on each of them.  This project
-contains a set of build scripts to build all my favorite unix tools
-(gnu ls, wget, curl, screen, git, subversion, perl, apache, etc).,
-with all my favorite options (e.g. 256 color terminal support)
-compiled so they work well together (e.g. apache mod_svn and git-svn).
+and I want a consistent set of tools.  This project contains a set of
+build scripts to build all my favorite unix tools (gnu ls, wget, curl,
+screen, git, subversion, perl, apache, etc)., with all my favorite
+options (e.g. 256 color terminal support) compiled so they work well
+together (e.g. apache mod_svn and git-svn).
 
 The goal of this project is to create a simple ports-tree like system
 that works on any unix-like operating system.  At the moment I am
