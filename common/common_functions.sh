@@ -110,6 +110,15 @@ function common_make
     $MAKE                                || exit
 }
 
+function common_test
+{
+    echo
+    echo
+    echo "Testing: $MAKE test"
+    echo
+    $MAKE test                           || exit
+}
+
 function common_install
 {
     if [ ! -z "$BACKUP" ]; then
