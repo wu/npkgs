@@ -11,13 +11,6 @@ export MAKE=gmake
 # source common envs
 . ../../common.sh
 
-if [ -z "$OPENSSL_TARGET" ]; then
-    echo "ERROR: OPENSSL_TARGET is not set in your environment"
-    echo "RECOMMEND SETTING IT IN: $NPKG_PATH/common/host/$HOST_SHORT.sh"
-    exit 1;
-
-fi
-
 CONFIGURE="./Configure shared --prefix=$PKG_PREFIX $OPENSSL_TARGET"
 
 common_fetch
@@ -26,6 +19,14 @@ common_clean
 common_untar
 
 cd $PACKAGE                          || exit
+
+if [ -z "$OPENSSL_TARGET" ]; then
+    echo
+    echo "ERROR: OPENSSL_TARGET is not set in your environment"
+    echo "RECOMMEND SETTING IT IN: $NPKG_PATH/common/host/$HOST_SHORT.sh"
+    echo
+fi
+
 
 # remove the '-fast' option for solaris-x86-cc target, this will allow
 # cross compiling for machines that don't support sse
