@@ -90,8 +90,9 @@ INSTALLING
 
   - os x - install developer tools, gcc
   - solaris 10 - install gcc and sun compiler
-  - open solaris - install sun compiler
-    - for media apps, install sun common build environment
+  - open solaris - install sun compiler and sun common build environment
+
+  sorry, this section isn't very detailed yet
 
 5. start building
 
