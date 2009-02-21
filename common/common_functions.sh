@@ -192,9 +192,9 @@ function common_install_links
           file="${file#$PKG_NAME/}"
           PKG_PREFIX="${PKG_PREFIX%/}"
           if [ -r "$NPKG_PREFIX/$file" ]; then
-	      echo "REPLACING WITH LINK: $NPKG_PREFIX/$file"
-              rm  $NPKG_PREFIX/$file
+              echo "REPLACING WITH LINK: $NPKG_PREFIX/$file"
           fi
+          rm  $NPKG_PREFIX/$file 2>/dev/null
           ln -s $PKG_DIR/$file $NPKG_PREFIX/$file
       fi
 
