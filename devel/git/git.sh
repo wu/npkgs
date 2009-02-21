@@ -4,7 +4,7 @@ PKG_NAME="git"
 PACKAGE="$PKG_NAME-1.6.1.3"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.kernel.org/pub/software/scm/git/$TARBALL"
-PREREQS="openssl perl curl make"
+PREREQS="openssl perl curl make expat tcl tk"
 
 export CC=gcc
 export MAKE=gmake
@@ -12,7 +12,7 @@ export MAKE=gmake
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-openssl=$PREFIX --without-tcltk --with-perl=$PREFIX/bin/perl --with-curl --with-expat"
+CONFIGURE="$CONFIGURE --with-openssl=$PREFIX/root/openssl --with-tcltk=$PREFIX/bin/wish --with-perl=$PREFIX/root/perl/bin/perl --with-curl=$PREFIX/root/curl --with-expat=$PREFIX/root/expat"
 
 common_fetch
 common_prereqs

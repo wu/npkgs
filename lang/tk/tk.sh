@@ -9,6 +9,8 @@ PREREQS="tcl"
 # source common envs
 . ../../common.sh
 
+CONFIGURE="$CONFIGURE --with-tcl=$PREFIX/root/tcl/lib"
+
 common_fetch
 common_prereqs
 common_clean
@@ -23,3 +25,6 @@ common_install
 
 common_install_links
 
+# create a symlink for version-specific 'wish'
+rm $PREFIX/bin/wish
+ln -s $PREFIX/bin/wish8.5 $PREFIX/bin/wish
