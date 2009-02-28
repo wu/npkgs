@@ -1,12 +1,9 @@
 #!/bin/bash
 
-PKG_NAME="sqlite"
-PKG_VER="3.6.11"
-PACKAGE="$PKG_NAME-$PKG_VER"
-TARBALL="$PKG_NAME-amalgamation-$PKG_VER.tar.gz"
-URL="http://www.sqlite.org/$TARBALL"
-
-PREREQS="readline"
+PKG_NAME="readline"
+PACKAGE="$PKG_NAME-6.0"
+TARBALL="$PACKAGE.tar.gz"
+URL="ftp://ftp.cwru.edu/pub/bash/$TARBALL"
 
 # source common envs
 . ../../common.sh
