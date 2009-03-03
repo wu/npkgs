@@ -180,7 +180,7 @@ function common_install_links
 
     echo
     echo "CHECKING FOR FILES IN: $NPKG_PREFIX/root/$PKG_NAME/"
-    for file in $(find $PKG_NAME/)
+    for file in $(find $PKG_NAME/ | grep -v '.svn' | grep -v '.git' )
     do
       if [ -d "$file" ]; then
           file="${file#$PKG_NAME/}"
@@ -194,12 +194,10 @@ function common_install_links
           if [ -r "$NPKG_PREFIX/$file" ]; then
               echo "REPLACING WITH LINK: $NPKG_PREFIX/$file"
           fi
-          rm  $NPKG_PREFIX/$file 2>/dev/null
+          rm $NPKG_PREFIX/$file 2>/dev/null
           ln -s $PKG_DIR/$file $NPKG_PREFIX/$file
       fi
 
     done
   )
 }
-
-
