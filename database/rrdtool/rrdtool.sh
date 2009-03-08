@@ -9,6 +9,8 @@ PREREQ="imlib2 freetype2 libart"
 # source common envs
 . ../../common.sh
 
+CONFIGURE="$CONFIGURE --enable-perl-site-install"
+
 # help find freetyp libs
 export LDFLAGS="-L$PREFIX/root/freetype2/lib -L$PREFIX/root/libart/lib $LDFLAGS"
 export CPPFLAGS="-I$PREFIX/root/freetype2/include/freetype2 -I$PREFIX/root/libart/include/libart-2.0 $CPPFLAGS"
