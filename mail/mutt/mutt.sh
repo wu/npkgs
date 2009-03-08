@@ -8,6 +8,8 @@ URL="ftp://ftp.mutt.org/mutt/$TARBALL"
 # source common envs
 . ../../common.sh
 
+CONFIGURE="$CONFIGURE --with-ssl=$PREFIX/root/openssl --enable-mailtool --enable-imap"
+
 common_fetch
 common_prereqs
 common_clean
