@@ -1,0 +1,14 @@
+--- pty.c.orig	2007-09-20 16:33:34.000000000 -0400
++++ pty.c	2007-09-20 16:33:59.000000000 -0400
+@@ -33,11 +33,6 @@
+ # include <sys/ioctl.h>
+ #endif
+ 
+-/* for solaris 2.1, Unixware (SVR4.2) and possibly others */
+-#ifdef HAVE_SVR4_PTYS
+-# include <sys/stropts.h>
+-#endif
+-
+ #if defined(sun) && defined(LOCKPTY) && !defined(TIOCEXCL)
+ # include <sys/ttold.h>
+ #endif
