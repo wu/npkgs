@@ -18,8 +18,25 @@ common_untar
 # build and install
 cd $PACKAGE                          || exit
 
-if [ "`uname -o`" = "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
+  echo
+  echo PATCHING FOR Darwin
+  echo
+  echo Patching pty.c
   $PATCHCMD pty.c < ../../files/patch-pty.c.diff
+  echo
+  echo DONE PATCHING
+  echo
+elif [ "$OS" = "SunOS" -a "$OSVER" = "5.11" ]; then
+  echo
+  echo PATCHING FOR OpenSolaris
+  echo
+  echo misc.c patch from: http://wiki.genunix.org/wiki/index.php/Screen
+  perl -i.orig -lpe 's/$/ || defined(sun)/ if $. == 616' misc.c
+  echo
+  echo
+  echo DONE PATCHING
+  echo
 fi
 
 common_configure
