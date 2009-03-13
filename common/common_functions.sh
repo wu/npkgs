@@ -154,8 +154,8 @@ function common_patch
     echo
     echo APPLYING PATCH: $PATCH
     echo
-    echo /usr/bin/gpatch \< "$PATCHDIR/$PATCH"
-    /usr/bin/gpatch < "$PATCHDIR/$PATCH" || exit
+    echo $PATCHCMD \< "$PATCHDIR/$PATCH"
+    $PATCHCMD < "$PATCHDIR/$PATCH" || exit
     echo APPLIED!
 }
 
@@ -180,7 +180,7 @@ function common_install_links
 
     echo
     echo "CHECKING FOR FILES IN: $NPKG_PREFIX/root/$PKG_NAME/"
-    for file in $(find $PKG_NAME/ | grep -v '.svn' | grep -v '.git' )
+    for file in $(find $PKG_NAME/ | grep -v '\.svn' | grep -v '\.git' )
     do
       if [ -d "$file" ]; then
           file="${file#$PKG_NAME/}"
