@@ -16,9 +16,25 @@ common_untar
 # build and install
 
 cd $PACKAGE/unix                     || exit
+
+if [ "$OS.$OSVER" = "SunOS.5.11" ]; then
+  echo
+  echo "PATCHING configure for OpenSolaris..."
+  echo
+  echo "from: http://sourceforge.net/tracker/index.php?func=detail&aid=1839067&group_id=10894&atid=110894"
+  echo
+  $PATCHCMD configure < ../../../files/SunOS.5.11.configure.patch || exit
+  echo
+  echo DONE
+  echo
+fi
+
 common_configure
 common_make
 common_install
 
 common_install_links
 
+# create a symlink for version-specific 'tclsh'
+rm $PREFIX/bin/tclsh
+ln -s $PREFIX/bin/tclsh8.5 $PREFIX/bin/tclsh
