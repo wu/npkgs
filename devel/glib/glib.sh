@@ -9,6 +9,8 @@ PREREQS="gettext"
 # source common envs
 . ../../common.sh
 
+export CONFIGURE="$CONFIGURE --with-libiconv=gnu"
+
 common_fetch
 common_prereqs
 common_clean
