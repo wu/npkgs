@@ -19,7 +19,8 @@ if [ ! -z "$NPKG_PREFIX" ]; then
 fi
 if [ -z $PREFIX ]; then
     echo "INSTALLING INTO DEFAULT PREFIX: /usr/local, override with NPKG_PREFIX env var"
-    export PREFIX="/usr/local"
+    export NPKG_PREFIX="/usr/local"
+    export PREFIX="$NPKG_PREFIX"
 fi
 if [ ! -d $PREFIX ]; then
   mkdir $PREFIX || exit 1
@@ -69,7 +70,7 @@ echo
 echo "INSTALLING INTO: $PKG_PREFIX"
 echo
 sleep 1;
-    
+
 # pkgconfig
 if [ -z "$PKG_CONFIG_PATH" ]; then
     export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
@@ -104,6 +105,10 @@ if [ -z "$CXX" ]; then
     export CXX='g++'
 fi
 
+if [ -x "$PREFIX/root/m4/bin/m4" ]; then
+    export M4="$PREFIX/root/m4/bin/m4"
+fi
+
 if [ -z "$CONFIGURE" ]; then
     CONFIGURE="./configure --prefix=$PKG_PREFIX"
 fi
@@ -118,6 +123,15 @@ fi
 
 if [ ! -d $DISTFILES ]; then
   mkdir $DISTFILES || exit 1
+fi
+
+echo PATCHCMD...
+if [ -z "$PATCHCMD" ]; then
+  if [ -r "/usr/bin/gpatch" ]; then
+    PATCHCMD="/usr/bin/gpatch"
+  elif [ -r "/usr/bin/patch" ]; then
+    PATCHCMD="/usr/bin/patch"
+  fi
 fi
 
 # build options
