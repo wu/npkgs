@@ -11,6 +11,12 @@ PREREQS="pkg-config glib"
 
 CONFIGURE="$CONFIGURE --with-proxy --with-textui"
 
+# if this is opensolaris, force use of our own glib!
+if [ "$OS.$OSVER" = "SunOS.5.11" ]
+then
+  export LD_LIBRARY_PATH="$PREFIX/root/glib/lib"
+fi
+
 common_fetch
 common_prereqs
 common_clean
