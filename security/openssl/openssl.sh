@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="openssl"
-PACKAGE="$PKG_NAME-0.9.8j"
+PACKAGE="$PKG_NAME-0.9.8k"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.openssl.org/source/$TARBALL"
 PREREQS="make"
@@ -37,5 +37,3 @@ common_make
 common_install
 common_install
 common_install_links
-
-
