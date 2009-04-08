@@ -107,7 +107,7 @@ function common_make
     echo
     echo "Building: $MAKE"
     echo
-    $MAKE                                || exit
+    $MAKE $@                             || exit
 }
 
 function common_test
