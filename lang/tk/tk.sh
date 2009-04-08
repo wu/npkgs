@@ -9,7 +9,7 @@ PREREQS="tcl"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-tcl=$PREFIX/root/tcl/lib"
+CONFIGURE="$CONFIGURE --with-tcl=$PREFIX/root/tcl/lib --enable-threads"
 
 common_fetch
 common_prereqs

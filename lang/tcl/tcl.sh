@@ -8,6 +8,8 @@ URL="http://superb-west.dl.sourceforge.net/sourceforge/tcl/$TARBALL"
 # source common envs
 . ../../common.sh
 
+CONFIGURE="$CONFIGURE --enable-threads"
+
 common_fetch
 common_prereqs
 common_clean
@@ -18,7 +20,7 @@ common_untar
 cd $PACKAGE/unix                     || exit
 
 if [ "$OS.$OSVER" = "SunOS.5.11" ]; then
-  if [ -z "`isainfo | grep amd`" ]; then
+  if [ -z "`isainfo | grep amd64`" ]; then
     echo
     echo "PATCHING configure for OpenSolaris 32-bit..."
     echo
