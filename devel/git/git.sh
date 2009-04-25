@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="git"
-PACKAGE="$PKG_NAME-1.6.1.3"
+PACKAGE="$PKG_NAME-1.6.2.4"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.kernel.org/pub/software/scm/git/$TARBALL"
 PREREQS="openssl perl curl make expat tcl tk"
@@ -24,6 +24,12 @@ cd $PACKAGE                          || exit
 
 common_configure
 common_make
-common_install
-common_install_links
 
+common_install
+
+if [ -r "$NPKG_PREFIX/bin/xmlto" ]; then
+  common_make install-doc
+fi
+
+
+common_install_links
