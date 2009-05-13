@@ -147,3 +147,8 @@ fi
 
 
 export LD_RUN_PATH=$PREFIX
+
+# get - just look in $PATH
+if [ -z "$WGET" ]; then
+    export WGET=wget
+fi

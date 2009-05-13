@@ -36,12 +36,30 @@ function common_untar_bzip
     fi
 }
 
+function common_unzip
+{
+    TARPATH="$DISTFILES/$TARBALL"
+
+    if [ ! -r $TARPATH ]; then
+        echo ERROR: no tarball found: $TARPATH
+        exit 1
+    fi
+
+    mkdir work && cd work
+
+    echo "/usr/bin/unzip $TARPATH"
+    if ! /usr/bin/unzip "$TARPATH"
+    then
+        echo ERROR: unzipping error
+    fi
+}
+
 function common_fetch
 {
     # acquire tarball
     if [ ! -r "$DISTFILES/$TARBALL" ]; then
         echo "ACQUIRING TARBALL: $TARBALL..."
-        wget $URL
+        $WGET $URL
         mv $TARBALL $DISTFILES/
     fi
 
@@ -135,9 +153,9 @@ function common_install
     fi
     echo
     echo
-    echo "INSTALLING: $MAKE install"
+    echo "INSTALLING: $MAKE install $@"
     echo
-    $MAKE install || exit
+    $MAKE install $@ || exit
 
 }
 
