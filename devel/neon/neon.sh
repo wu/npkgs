@@ -27,4 +27,3 @@ common_configure
 common_make
 common_install
 common_install_links
-

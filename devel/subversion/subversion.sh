@@ -43,4 +43,3 @@ make install-swig-pl || exit
 echo
 echo
 common_install_links
-
