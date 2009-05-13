@@ -1,0 +1,13 @@
+diff -ur tesseract-2.01/display/pgedit.cpp tesseract-2.01a/display/pgedit.cpp
+--- tesseract-2.01/display/pgedit.cpp	2007-05-11 02:28:07.000000000 +0200
++++ tesseract-2.01a/display/pgedit.cpp	2007-11-21 00:39:30.000000000 +0100
+@@ -797,6 +797,9 @@
+ 
+                                  // ptr to last dot
+   filename_extension = strrchr (name.string (), '.');
++  if (filename_extension == NULL)
++    filename_extension = "";     // prevent segfaults
++
+   #ifdef __UNIX__
+   /*    TEXTROW*                tessrows;
+       TBLOB*                  tessblobs;

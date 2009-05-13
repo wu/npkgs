@@ -1,0 +1,13 @@
+diff -ur tesseract-2.01/image/imgs.cpp tesseract-2.01a/image/imgs.cpp
+--- tesseract-2.01/image/imgs.cpp	2007-05-11 02:31:55.000000000 +0200
++++ tesseract-2.01a/image/imgs.cpp	2007-11-20 20:10:23.000000000 +0100
+@@ -238,7 +238,8 @@
+   }
+   if (bits_per_pixel != 1 && bits_per_pixel != 2
+     && bits_per_pixel != 4 && bits_per_pixel != 5
+-  && bits_per_pixel != 6 && bits_per_pixel != 8 && bits_per_pixel != 24) {
++    && bits_per_pixel != 6 && bits_per_pixel != 8
++    && bits_per_pixel != 16 && bits_per_pixel != 24) {
+     BADBPP.error ("check_legal_image_size", TESSLOG, "%d", bits_per_pixel);
+     return -1;
+   }

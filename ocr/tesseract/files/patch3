@@ -1,0 +1,32 @@
+diff -ur tesseract-2.01/classify/intproto.cpp tesseract-2.01x/classify/intproto.cpp
+--- tesseract-2.01/classify/intproto.cpp	2007-07-06 20:48:01.000000000 +0200
++++ tesseract-2.01x/classify/intproto.cpp	2007-11-20 12:20:33.000000000 +0100
+@@ -1079,8 +1079,8 @@
+   fwrite((char *) &Templates->NumClassPruners, sizeof (int), 1, File);
+   fwrite((char *) &Templates->IndexFor[0], sizeof (CLASS_INDEX),
+          unicharset_size, File);
+-  fwrite((char *) &Templates->ClassIdFor[0], sizeof (CLASS_ID),
+-         NumClassesIn (Templates), File);
++  for (i = 0; i < NumClassesIn (Templates); i++)
++    fwrite((char *) &Templates->ClassIdFor[i], sizeof(CLASS_ID), 1, File);
+ 
+   /* then write out the class pruners */
+   for (i = 0; i < NumClassPrunersIn (Templates); i++)
+@@ -1092,7 +1092,16 @@
+     Class = ClassForIndex (Templates, i);
+ 
+     /* first write out the high level struct for the class */
+-    fwrite ((char *) Class, sizeof (INT_CLASS_STRUCT), 1, File);
++    fwrite((char *)(&Class->NumProtos), sizeof(Class->NumProtos), 1, File);
++    fwrite((char *)(&Class->NumProtoSets),
++      sizeof(Class->NumProtoSets), 1, File);
++    fwrite((char *)(&Class->NumConfigs), sizeof(Class->NumConfigs), 1, File);
++    for (j = 0; j <= MAX_NUM_PROTO_SETS; j++) {
++      int junk = 0;
++      fwrite((char *)(&junk), sizeof(junk), 1, File);
++    }
++    for (j = 0; j < MAX_NUM_CONFIGS; j++)
++      fwrite((char *)(&Class->ConfigLengths[j]), sizeof(UINT16), 1, File);
+ 
+     /* then write out the proto lengths */
+     fwrite ((char *) (Class->ProtoLengths), sizeof (UINT8),

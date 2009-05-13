@@ -1,0 +1,13 @@
+diff -ur tesseract-2.01/dict/reduce.cpp tesseract-2.01a/dict/reduce.cpp
+--- tesseract-2.01/dict/reduce.cpp	2007-08-27 20:13:53.000000000 +0200
++++ tesseract-2.01a/dict/reduce.cpp	2007-11-18 23:14:40.000000000 +0100
+@@ -335,6 +335,9 @@
+     }
+   }
+ 
++  if (!edge_occupied(dawg,node))	/* aeb */
++    return;
++
+   qsort ((void *) &edge_of (dawg, node + forward_edges),
+          backward_edges,
+          sizeof (EDGE_RECORD),

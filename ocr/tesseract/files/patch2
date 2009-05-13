@@ -1,0 +1,23 @@
+diff -ur tesseract-2.01.orig/dict/dawg.cpp tesseract-2.01/dict/dawg.cpp
+--- tesseract-2.01.orig/dict/dawg.cpp	2007-08-27 20:13:13.000000000 +0200
++++ tesseract-2.01/dict/dawg.cpp	2007-11-19 04:13:15.000000000 +0100
+@@ -315,13 +315,17 @@
+   #else
+   file = open_file (filename, "rb");
+   #endif
+-  fread (&num_edges,  sizeof (INT32), 1, file);
+-  num_edges = ntohl(num_edges);
++  if (fread (&num_edges,  sizeof (INT32), 1, file) != 1)
++    num_edges = 0;
++  else
++    num_edges = ntohl(num_edges);
+   if (num_edges > max_num_edges || num_edges < 0) {
+     cprintf("Error: trying to read a DAWG '%s' that contains \
+ %d edges while the maximum is %d.\n", filename, num_edges, max_num_edges);
+     exit(1);
+   }
++  if (num_edges == 0)
++    return;
+ 
+   UINT32 *dawg_32 = (UINT32*) Emalloc(num_edges * sizeof (UINT32));
+   fread(&dawg_32[0], sizeof (UINT32), num_edges, file);
