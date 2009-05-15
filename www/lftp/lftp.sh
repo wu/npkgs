@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="lftp"
-PACKAGE="$PKG_NAME-3.7.8"
+PACKAGE="$PKG_NAME-3.7.14"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.yars.free.net/pub/source/lftp/$TARBALL"
-PREREQS="openssl"
+PREREQS="openssl readline"
 
 # source common envs
 . ../../common.sh
@@ -23,5 +23,3 @@ common_configure
 common_make
 common_install
 common_install_links
-
-
