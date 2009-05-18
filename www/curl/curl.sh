@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="curl"
-PACKAGE="$PKG_NAME-7.19.3"
+PACKAGE="$PKG_NAME-7.19.5"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://curl.haxx.se/download/$TARBALL"
 PREREQS="openssl"
