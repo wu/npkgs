@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="rrdtool"
-PACKAGE="$PKG_NAME-1.2.30"
+PACKAGE="$PKG_NAME-1.3.7"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://oss.oetiker.ch/rrdtool/pub/$TARBALL"
 PREREQ="imlib2 freetype2 libart"
@@ -9,7 +9,7 @@ PREREQ="imlib2 freetype2 libart"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --enable-perl-site-install"
+CONFIGURE="$CONFIGURE --enable-perl-site-install --disable-tcl --disable-ruby"
 
 # help find freetyp libs
 export LDFLAGS="-L$PREFIX/root/freetype2/lib -L$PREFIX/root/libart/lib $LDFLAGS"
