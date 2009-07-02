@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="perl"
-PACKAGE="$PKG_NAME-5.10.0"
+PACKAGE="$PKG_NAME-5.8.9"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.perl.com/CPAN/src/$TARBALL"
 
@@ -46,4 +46,3 @@ common_test
 
 common_install
 common_install_links
-
