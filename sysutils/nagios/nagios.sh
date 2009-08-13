@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="nagios"
-PACKAGE="$PKG_NAME-3.0.6"
+PACKAGE="$PKG_NAME-3.2.0"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://superb-east.dl.sourceforge.net/sourceforge/nagios/$TARBALL"
 PREREQS="make"
