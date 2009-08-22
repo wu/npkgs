@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="subversion"
-PACKAGE="$PKG_NAME-1.5.5"
+PACKAGE="$PKG_NAME-1.6.5"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://subversion.tigris.org/downloads/$TARBALL"
 PREREQS="swig apr-1 apr-util neon libiconv apache"
