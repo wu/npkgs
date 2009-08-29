@@ -4,7 +4,7 @@ PKG_NAME="glib"
 PACKAGE="$PKG_NAME-2.19.9"
 TARBALL="$PACKAGE.tar.gz"
 URL="ftp://ftp.gtk.org/pub/glib/2.19/$TARBALL"
-PREREQS="gettext"
+PREREQS="gettext libiconv"
 
 # source common envs
 . ../../common.sh
