@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="lftp"
-PACKAGE="$PKG_NAME-3.7.14"
+PACKAGE="$PKG_NAME-4.0.1"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.yars.free.net/pub/source/lftp/$TARBALL"
 PREREQS="openssl readline"
