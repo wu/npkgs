@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PKG_NAME="jpeg"
-PACKAGE="${PKG_NAME}src.v6b"
+PKG_VER="7"
+PACKAGE="${PKG_NAME}src.v$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.ijg.org/files/$TARBALL"
 
@@ -16,7 +17,7 @@ common_clean
 common_untar
 
 # build and install
-cd jpeg-6b                          || exit
+cd jpeg-$PKG_VER                        || exit
 
 common_configure
 
@@ -28,4 +29,3 @@ mkdir -p $PKG_PREFIX $PKG_PREFIX/bin $PKG_PREFIX/man/man1 $PKG_PREFIX/include $P
 
 common_install
 common_install_links
-
