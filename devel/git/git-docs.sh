@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="git-manpages"
-PKG_VERSION="1.6.5"
+PKG_VERSION="1.6.5.1"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="wget http://www.kernel.org/pub/software/scm/git/$TARBALL"
