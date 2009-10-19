@@ -5,7 +5,7 @@
 PKG_NAME="pv"
 PACKAGE="$PKG_NAME-1.1.4"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://pipeviewer.googlecode.com/files/pv-1.1.4.tar.gz"
+URL="http://pipeviewer.googlecode.com/files/$TARBALL"
 
 # source common envs
 . ../../common.sh
