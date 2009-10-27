@@ -1,14 +1,13 @@
 #!/bin/bash
 
-PKG_NAME="libpng"
-PACKAGE="$PKG_NAME-1.2.35"
+PKG_NAME="cairo"
+PACKAGE="$PKG_NAME-1.8.8"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/libpng/$TARBALL"
+URL="http://cairographics.org/releases/$TARBALL"
+PREREQS="pixman"
 
 # source common envs
 . ../../common.sh
-
-CONFIGURE="$CONFIGURE --enable-static"
 
 common_fetch
 common_prereqs

@@ -88,11 +88,18 @@ INSTALLING
 
 4. install c compiler(s) on your system
 
-  - os x - install developer tools, gcc
-  - solaris 10 - install gcc and sun compiler
-  - open solaris - install sun compiler and sun common build environment
+  - os x
+    - install developer tools
+    - install gcc
 
-  sorry, this section isn't very detailed yet
+  - solaris 10
+    - install the sun compiler
+    - install gcc from sunfreeware.com - required for a few packages
+
+  - open solaris
+    - pfexec packagemanager
+      - install 'sunstudio' and 'SUNWgcc' packages
+    - install the devel/cbe port
 
 5. start building
 
@@ -100,5 +107,21 @@ INSTALLING
   ./git.sh
 
 
+SOLARIS AND OPENSOLARIS
 
+You will need to adjust your library paths.  This can be done by
+creating your own private ld.config file.  Run 'crle' without any
+arguments to determine the current library paths, and then add
+$NPKG_PREFIX.  There is no need to do this as root.
+
+  export NPKG_PREFIX=/usr/foo
+  crle -c $NPKG_PREFIX/ld.config -l /lib:/usr/lib:$NPKG_PREFIX/lib -i /lib -i /usr/lib -i $NPKG_PREFIX/lib
+
+After doing this you must export the LD_CONFIG environment variable to be
+the path of the ld.config file you specified.
+
+  export LD_CONFIG=$NPKG_PREFIX/ld.config
+
+You'll need to repeat this process every time you install a new
+dynamic library.  This will eventually be automated.
 

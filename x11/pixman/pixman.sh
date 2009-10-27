@@ -1,14 +1,12 @@
 #!/bin/bash
 
-PKG_NAME="libpng"
-PACKAGE="$PKG_NAME-1.2.35"
+PKG_NAME="pixman"
+PACKAGE="$PKG_NAME-0.16.2"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/libpng/$TARBALL"
+URL="http://cairographics.org/releases/$TARBALL"
 
 # source common envs
 . ../../common.sh
-
-CONFIGURE="$CONFIGURE --enable-static"
 
 common_fetch
 common_prereqs
