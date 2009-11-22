@@ -1,9 +1,9 @@
 #!/bin/bash
 
 PKG_NAME="libpng"
-PACKAGE="$PKG_NAME-1.2.35"
+PACKAGE="$PKG_NAME-1.2.40"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/libpng/$TARBALL"
+URL="http://prdownloads.sourceforge.net/libpng/$TARBALL"
 
 # source common envs
 . ../../common.sh

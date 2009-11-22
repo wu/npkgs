@@ -4,10 +4,12 @@ PKG_NAME="imlib2"
 PACKAGE="$PKG_NAME-1.4.2"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://voxel.dl.sourceforge.net/sourceforge/enlightenment/$TARBALL"
-PREREQS="freetype1 libpng"
+PREREQS="freetype1 libpng jpeg"
 
 # source common envs
 . ../../common.sh
+
+export CC=gcc
 
 CONFIGURE="$CONFIGURE --with-jpeg=yes"
 export LDFLAGS="-L$PREFIX/root/jpeg/lib $LDFLAGS"

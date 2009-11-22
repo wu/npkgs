@@ -8,6 +8,8 @@ URL="http://linuxbrit.co.uk/downloads/$TARBALL"
 # source common envs
 . ../../common.sh
 
+export CC=gcc
+
 common_fetch
 common_prereqs
 common_clean
