@@ -26,6 +26,14 @@ cd $PACKAGE                          || exit
 common_configure
 common_make
 
+# /usr/ucb/install does not exist on opensolaris
+if [ "$OS" = "SunOS" -a ! -r "/usr/ucb/install" ]
+then
+    echo "Adjusting path for 'install' script, /usr/ucb/install does not exist!"
+    perl -pi -e's|/usr/ucb/install|install|g' Makefile
+    echo "DONE"
+fi
+
 common_install
 
 common_install_links
