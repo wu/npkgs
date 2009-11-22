@@ -1,9 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="expat"
-PACKAGE="$PKG_NAME-2.0.1"
+PKG_VERSION="2.0.1"
+PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/expat/$PACKAGE.tar.gz"
+URL="http://downloads.sourceforge.net/project/expat/expat/$PKG_VERSION/$TARBALL"
 
 # source common envs
 . ../../common.sh
