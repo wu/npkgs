@@ -1,9 +1,9 @@
 #!/bin/bash
 
 PKG_NAME="tk"
-PACKAGE="${PKG_NAME}8.5.7"
+PACKAGE="${PKG_NAME}8.5.8"
 TARBALL="$PACKAGE-src.tar.gz"
-URL="http://superb-west.dl.sourceforge.net/sourceforge/tcl/$TARBALL"
+URL="http://prdownloads.sourceforge.net/tcl/$TARBALL"
 PREREQS="tcl"
 
 # source common envs
