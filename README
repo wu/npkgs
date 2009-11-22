@@ -96,10 +96,13 @@ INSTALLING
     - install the sun compiler
     - install gcc from sunfreeware.com - required for a few packages
 
-  - open solaris
-    - pfexec packagemanager
-      - install 'sunstudio' and 'SUNWgcc' packages
+  - opensolaris
+    - pfexec pkg install SUNWgcc sunstudio
     - install the devel/cbe port
+      - this should be done with your own account, not root
+      - pfexec mkdir -p /opt/dtbld/packages
+      - pfexec chown myuser /opt/dtbld/packages
+      - cd devel/cbe; ./cbe-1.7.0-rc1.x86.sh
 
 5. start building
 
@@ -114,7 +117,7 @@ creating your own private ld.config file.  Run 'crle' without any
 arguments to determine the current library paths, and then add
 $NPKG_PREFIX.  There is no need to do this as root.
 
-  export NPKG_PREFIX=/usr/foo
+  export NPKG_PREFIX=/usr/local
   crle -c $NPKG_PREFIX/ld.config -l /lib:/usr/lib:$NPKG_PREFIX/lib -i /lib -i /usr/lib -i $NPKG_PREFIX/lib
 
 After doing this you must export the LD_CONFIG environment variable to be
