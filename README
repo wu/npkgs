@@ -120,6 +120,16 @@ $NPKG_PREFIX.  There is no need to do this as root.
   export NPKG_PREFIX=/usr/local
   crle -c $NPKG_PREFIX/ld.config -l /lib:/usr/lib:$NPKG_PREFIX/lib -i /lib -i /usr/lib -i $NPKG_PREFIX/lib
 
+The above provides the safest way to run npkg since it takes your
+system library paths ahead of the npkg library paths.  Some ports
+might not compile properly if you do this since the system libraries
+might not be new enought to satisfy some of the npkg dependencies.
+The recommended solution is therefore to list the npkg libraries
+first:
+
+  crle -c $NPKG_PREFIX/ld.config -l $NPKG_PREFIX/lib:/lib:/usr/lib -i $NPKG_PREFIX/lib -i /lib -i /usr/lib
+
+
 After doing this you must export the LD_CONFIG environment variable to be
 the path of the ld.config file you specified.
 

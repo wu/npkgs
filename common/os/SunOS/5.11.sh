@@ -5,6 +5,7 @@ then
   exit 1
 fi
 
+LD_CONFIG_ORIG=$LD_CONFIG
 
 # save some env vars
 export HOSTNAME=$HOST
@@ -24,3 +25,12 @@ export NPKG_PREFIX=$LESS_NPKG_PREFIX
 export NPKG_PATH=$LESS_NPKG_PATH
 
 export PATH="$PREFIX/bin:$PATH"
+
+# reset custom LD_CONFIG
+if [ -r "$LD_CONFIG_ORIG" ]
+then
+    export LD_CONFIG=$LD_CONFIG_ORIG
+    echo
+    echo "RESET CUSTOM LD_CONFIG: $LD_CONFIG"
+    echo
+fi
