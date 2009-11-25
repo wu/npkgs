@@ -1,15 +1,13 @@
 #!/bin/bash
 
 PKG_NAME="mrxvt"
-PACKAGE="$PKG_NAME-0.5.4"
+PKG_VERSION="0.5.4"
+PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/materm/$TARBALL"
-PREREQS="openssl"
+URL="http://downloads.sourceforge.net/project/materm/mrxvt%20source/$PKG_VERSION/$TARBALL"
 
 # source common envs
 . ../../common.sh
-
-#CONFIGURE="$CONFIGURE --with-ssl=$PREFIX"
 
 common_fetch
 common_prereqs
