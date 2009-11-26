@@ -1,0 +1,71 @@
+#!/usr/local/bin/perl -w
+use strict;
+
+my $debug = 0;
+
+my ( $action, $pkg ) = @ARGV;
+
+# only install action supported!
+$action = "install";
+
+my $npkg_prefix = $ENV{NPKG_PREFIX};
+print "PREFIX: $npkg_prefix\n" if $debug;
+
+install_package( $pkg );
+
+print "DONE\n\n";
+
+
+sub install_package {
+    my ( $package ) = @_;
+
+    print "\n", ">"x77, "\n";
+    print "Installing package: $package\n";
+
+    my $path = "$npkg_prefix/npkg/*/$package";
+    #$glob =~ tr/a-zA-Z\/\*//cd;
+    #print "GLOB: $glob\n" if $debug;
+    #my $path = glob $glob;
+    #unless ( $path ) {
+    #    die "ERROR: can't locate path for $glob\n";
+    #}
+    print "PATH: $path\n" if $debug;
+
+    #unless ( -r $path ) {
+    #    die "Error: Package path not found: $path\n";
+    #}
+
+    print "Executing: $package.sh in $path\n";
+
+    # run command capturing output
+    open my $run, "-|", "cd $path; ./$package.sh 2>&1" or die "Unable to execute package installer: $package: $!";
+    while ( my $line = <$run> )
+    {
+      chomp $line;
+      print "$line\n";
+
+      if ( $line =~ m|Error: PREREQ not found:| ) {
+          close $run;
+          $line =~ m|/([^/]+)$|;
+          my $prereq = $1;
+          $prereq =~ s|\s||g;
+
+          print "Installing prereq: $prereq\n";
+          install_package( $prereq  );
+
+          print "Prereq $prereq satistifed, back to installing $package\n";
+          install_package( $package );
+          return;
+      }
+    }
+    close $run;
+    
+    # check exit status
+    unless ( $? eq 0 ) {
+      my $status = $? >> 8;
+      my $signal = $? & 127;
+      die "Error installing package: $package\n\tstatus=$status\n\tsignal=$signal";
+    }
+
+}
+
