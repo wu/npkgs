@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="neon"
-PACKAGE="$PKG_NAME-0.28.3"
+PACKAGE="$PKG_NAME-0.29.0"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.webdav.org/neon/$TARBALL"
 PREREQS="openssl expat"
@@ -9,10 +9,9 @@ PREREQS="openssl expat"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-ssl=openssl                                   \
-                      --with-expat                                         \
-                      --with-libs=$PREFIX/root/openssl:$PREFIX/root/expat  \
-                      --enable-shared=yes                                  \
+CONFIGURE="$CONFIGURE --with-ssl=openssl                                           \
+                      --with-expat                                                 \
+                      --enable-shared=yes                                          \
                       "
 
 common_fetch

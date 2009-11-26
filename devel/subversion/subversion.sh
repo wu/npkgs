@@ -4,22 +4,19 @@ PKG_NAME="subversion"
 PACKAGE="$PKG_NAME-1.6.6"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://subversion.tigris.org/downloads/$TARBALL"
-PREREQS="swig apr-1 apr-util neon libiconv apache"
+PREREQS="swig neon libiconv apache"
 
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --disable-berkeley-db                    \
-                      --with-neon=$PREFIX/root/neon            \
-                      --with-swig=$PREFIX/root/swig            \
-                      --with-apr=$PREFIX/root/apr-1            \
-                      --with-apr-util=$PREFIX/root/apr-util    \
-                      --without-sasl                           \
-                      --with-ssl=$PREFIX/root/openssl          \
-                      --with-apxs=$PREFIX/root/apache/bin/apxs \
+CONFIGURE="$CONFIGURE --disable-berkeley-db                            \
+                      --with-neon=$PREFIX/root/neon                    \
+                      --with-swig=$PREFIX/root/swig                    \
+                      --with-apr=$PREFIX/root/apache/bin/apr-1-config  \
+                      --without-sasl                                   \
+                      --with-ssl=$PREFIX/root/openssl                  \
+                      --with-apxs=$PREFIX/root/apache/bin/apxs         \
                       "
-
-
 
 common_fetch
 common_prereqs
