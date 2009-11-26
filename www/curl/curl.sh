@@ -9,7 +9,7 @@ PREREQS="openssl"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-ssl=$PREFIX/root/openssl"
+CONFIGURE="$CONFIGURE --with-ssl=$PREFIX"
 
 common_fetch
 common_prereqs
