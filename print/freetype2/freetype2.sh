@@ -1,15 +1,14 @@
 #!/bin/bash
 
 PKG_NAME="freetype2"
-PACKAGE="freetype-2.3.7"
+PACKAGE="freetype-2.3.11"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://download.savannah.gnu.org/releases/freetype/$TARBALL"
 
-MAKE=gmake
-CC=gcc
-
 # source common envs
 . ../../common.sh
+
+export CC=gcc
 
 common_fetch
 common_prereqs

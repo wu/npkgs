@@ -1,0 +1,43 @@
+--- gettext-0.17/gettext-tools/src/Makefile.am-orig 2007-12-10 21:26:48.898968000 -0600
++++ gettext-0.17/gettext-tools/src/Makefile.am 2007-12-10 21:41:17.118388000 -0600
+@@ -235,22 +235,24 @@ msgmerge_CXXFLAGS = $(AM_CXXFLAGS) $(OPE
+ # INTL_MACOSX_LIBS is needed because the programs depend on libintl.la
+ # but libtool doesn't put -Wl,-framework options into .la files.
+ # For msginit, it is also needed because of localename.c.
+-msgcmp_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgfmt_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgmerge_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ @MSGMERGE_LIBM@ $(WOE32_LDADD) $(OPENMP_CFLAGS)
+-msgunfmt_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-xgettext_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ @LTLIBEXPAT@ $(WOE32_LDADD)
+-msgattrib_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgcat_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgcomm_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgconv_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgen_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgexec_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msgfilter_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msggrep_LDADD = $(LIBGREP) libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msginit_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-msguniq_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
+-recode_sr_latin_LDADD = ../gnulib-lib/libgettextlib.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD)
++msgcmp_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgfmt_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgmerge_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ @MSGMERGE_LIBM@ $(WOE32_LDADD) $(OPENMP_CFLAGS) -lsec
++msgunfmt_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++xgettext_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ @LTLIBEXPAT@ $(WOE32_LDADD) -lsec
++msgattrib_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgcat_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgcomm_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgconv_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgen_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgexec_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msgfilter_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msggrep_LDADD = $(LIBGREP) libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msginit_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++msguniq_LDADD = libgettextsrc.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++recode_sr_latin_LDADD = ../gnulib-lib/libgettextlib.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++hostname_LDADD = ../gnulib-lib/libgettextlib.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
++urlget_LDADD = ../gnulib-lib/libgettextlib.la @INTL_MACOSX_LIBS@ $(WOE32_LDADD) -lsec
+ 
+ # Specify installation directory, for --enable-relocatable.
+ msgcmp_CPPFLAGS = $(AM_CPPFLAGS) -DINSTALLDIR=\"$(bindir)\"

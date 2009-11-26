@@ -1,10 +1,9 @@
 #!/bin/bash
 
-PKG_NAME="cairo"
-PACKAGE="$PKG_NAME-1.8.8"
+PKG_NAME="automake"
+PACKAGE="$PKG_NAME-1.9"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://cairographics.org/releases/$TARBALL"
-PREREQS="pixman freetype1 fontconfig glib"
+URL="http://ftp.gnu.org/gnu/$PKG_NAME/$TARBALL"
 
 # source common envs
 . ../../common.sh

@@ -2,10 +2,10 @@
 
 PKG_NAME="pango"
 PKG_VERSION="1.26"
-PACKAGE="$PKG_NAME-$PKG_VERSION.0"
+PACKAGE="$PKG_NAME-$PKG_VERSION.1"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://ftp.gnome.org/pub/gnome/sources/pango/$PKG_VERSION/$TARBALL"
-PREREQS="cairo"
+PREREQS="cairo automake"
 
 # source common envs
 . ../../common.sh
@@ -18,10 +18,20 @@ common_untar_bzip
 # build and install
 cd $PACKAGE                          || exit
 
+if [ "$OS.$OSVER" = "SunOS.5.11" ]
+then
+    echo
+    echo PATCHING FOR OPENSOLARIS
+    echo SEE: http://src.opensolaris.org/source/xref/jds/spec-files/trunk/patches/pango-04-sunstudio.diff
+    echo
+    $PATCHCMD --strip 1 < ../../files/pango-04-sunstudio.diff || exit
+    echo
+    echo DONE PATCHING...
+    echo
+fi
+
 common_configure
 common_make
 common_install
-
-#cp /usr/local/npkg/x11/pango/work/pango-1.26.0/pango/pangofc-* /usr/local/include/pango-1.0/pango/
 
 common_install_links
