@@ -104,8 +104,8 @@ sub install_package {
           print color 'reset';
           print "\n";
       }
-      elsif ( $line =~ m/^\S*(?:cc|make|install|libtool) /i ) {
-          $line =~ m/^(\S+(?:cc|make|install)) (.*)$/i;
+      elsif ( $line =~ m/^\s*\S*(?:cc|make|install|libtool) /i ) {
+          $line =~ m/^(\s*\S*(?:cc|make|install|libtool)) (.*)$/i;
           print color 'magenta';
           print "$1 ";
           print color 'reset';
