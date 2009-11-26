@@ -104,10 +104,48 @@ INSTALLING
       - pfexec chown myuser /opt/dtbld/packages
       - cd devel/cbe; ./cbe-1.7.0-rc1.x86.sh
 
-5. start building
+5. start installing
 
   cd $NPKG_PATH/devel/git
   ./git.sh
+
+The package source will be downloaded and expanded into a work/
+subdirectory.
+
+If there are any prereqs for your package, they will be displayed.
+Note that prereqs are not automatically followed, you'll have to set
+into the prereq directory and build that package, then return to your
+original build.  There is a plan to build a wrapper script in the
+future to follow the dependency chain automatically.  If you don't
+know what category the prereq falls into, you can easily find it by
+using a glob in the category name.  For example, if you're installing
+git and it requires tcl, from the git directory, use this:
+
+  cd ../../*/tcl/
+
+Hint: to keep track of a dependency chain, use 'pushd' to set into the
+dependency's directory.  That way you can get back to the previous
+package(s) you were building with 'popd'.  For example:
+
+  # starting in the git directory
+  ./git.sh
+  # git build dies with tcl requirement, go to the tcl directory and build
+  pushd ../../*/tcl
+  ./tcl.sh
+  # after tcl installs, return to the git build
+  popd
+  ./git.sh
+
+6. uninstalling
+
+Removing a package is a two-step process.  First, delete the
+installed package(s) from $NPKG_PREFIX/root, e.g.:
+
+  rm -rf $NPKG_PREFIX/root/git-1.6.5.3
+
+Second, remove any symlinks that pointed to this package, i.e. the dead symlinks:
+
+  find $NPKG_PREFIX -type l ! -xtype f ! -xtype d -ls -exec rm {} \;
 
 
 SOLARIS AND OPENSOLARIS
