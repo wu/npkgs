@@ -1,20 +1,39 @@
 #!/usr/local/bin/perl -w
 use strict;
+use Term::ANSIColor;
 
+$| = 1;
 my $debug = 0;
-
-my ( $action, $pkg ) = @ARGV;
-
-# only install action supported!
-$action = "install";
 
 my $npkg_prefix = $ENV{NPKG_PREFIX};
 print "PREFIX: $npkg_prefix\n" if $debug;
 
-install_package( $pkg );
+
+#
+#_* main
+#
+
+my $action = shift @ARGV;
+
+if ( $action eq "install" ) {
+    for my $package ( @ARGV ) {
+        install_package( $package );
+    }
+}
+elsif ( $action eq "deadlinks" ) {
+    print `find $npkg_prefix -type l ! -xtype f ! -xtype d -ls -exec rm {} \\;`;
+}
+else {
+    die "ERROR: action not supported: $action\n";
+}
+
 
 print "DONE\n\n";
 
+
+#
+#_* methods
+#
 
 sub install_package {
     my ( $package ) = @_;
@@ -38,13 +57,14 @@ sub install_package {
     print "Executing: $package.sh in $path\n";
 
     # run command capturing output
-    open my $run, "-|", "cd $path; ./$package.sh 2>&1" or die "Unable to execute package installer: $package: $!";
+    open my $run, "-|", "cd $path && ./$package.sh 2>&1" or die "Unable to execute package installer: $package: $!";
     while ( my $line = <$run> )
     {
       chomp $line;
-      print "$line\n";
 
       if ( $line =~ m|Error: PREREQ not found:| ) {
+          print "$line\n";
+
           close $run;
           $line =~ m|/([^/]+)$|;
           my $prereq = $1;
@@ -57,6 +77,77 @@ sub install_package {
           install_package( $package );
           return;
       }
+      elsif ( $line =~ m|^checking | ) {
+          $line =~ s/^(checking (?:whether|for|if|how to)|checking )//;
+          print "$1";
+          print color 'cyan';
+
+          $line =~ s|(.*)... (.*?)$||;
+          my $check = $1 || $line;;
+          my $answer = $2;
+
+          print "$check... ";
+
+          if ( $answer ) {
+              if ( $answer =~ m/yes|ok/ ) {
+                  print color 'green';
+              }
+              elsif ( $answer =~ m|\bno| ) {
+                  print color 'red';
+              }
+              else {
+                  print color 'yellow';
+              }
+              print $answer;
+          }
+
+          print color 'reset';
+          print "\n";
+      }
+      elsif ( $line =~ m/^\S*(?:cc|make|install|libtool) /i ) {
+          $line =~ m/^(\S+(?:cc|make|install)) (.*)$/i;
+          print color 'magenta';
+          print "$1 ";
+          print color 'reset';
+          print "$2\n";
+      }
+      elsif ( $line =~ m/^(?:configure|config.status): / ) {
+          print color 'bold blue';
+          print "$line\n";
+          print color 'reset';
+      }
+      elsif ( $line =~ m/^cd / ) {
+          $line =~ m|^(cd \S+)(.*)$|;
+          print color 'green';
+          print "$1";
+          print color 'reset';
+          print "$2\n";
+      }
+      elsif ( $line =~ m|^\S*\s*\S+libtool | ) {
+          $line =~ m|^(\S*\s*\S+libtool) (.*)$|;
+          print color 'magenta';
+          print "$1 ";
+          print color 'reset';
+          print "$2\n";
+      }
+      elsif ( $line =~ m|^x | ) {
+          print color 'yellow';
+          print "$line\n";
+          print color 'reset';
+      }
+      elsif ( $line =~ m|warning|i && $line !~ m|seems to be moved| ) {
+          print color 'bold yellow';
+          print "$line\n";
+          print color 'reset';
+      }
+      elsif ( $line =~ m|error|i ) {
+          print color 'bold red';
+          print "$line\n";
+          print color 'reset';
+      }
+      else {
+          print "$line\n";
+      }
     }
     close $run;
     
@@ -67,5 +158,7 @@ sub install_package {
       die "Error installing package: $package\n\tstatus=$status\n\tsignal=$signal";
     }
 
+    print "Removing work directory for $package...\n";
+    system( "cd $path && rm -rf work/" );
 }
 
