@@ -1,0 +1,550 @@
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/configure.in pango-1.25.5/configure.in
+--- SUNWpango-1.25.5/i386/pango-1.25.5/configure.in	2009-08-27 14:45:12.931222570 +0200
++++ pango-1.25.5/configure.in	2009-08-27 14:46:25.400555664 +0200
+@@ -143,9 +143,11 @@ AC_CHECK_FUNCS(mprotect sysconf getpages
+ AC_CHECK_HEADERS(unistd.h sys/mman.h)
+ 
+ # Make sure we don't link to libstdc++ (needs de-gcc-fication)
+-CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
+-
+-
++if test "$GCC" = yes; then
++    CXXFLAGS="$CXXFLAGS -fno-rtti -fno-exceptions"
++  else
++    echo "hi"
++  fi
+ #
+ # Win32 stuff
+ #
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/glyphstring.c pango-1.25.5/pango/glyphstring.c
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/glyphstring.c	2009-08-15 00:43:57.000000000 +0200
++++ pango-1.25.5/pango/glyphstring.c	2009-08-27 14:43:28.998715659 +0200
+@@ -347,7 +347,7 @@ pango_glyph_string_get_logical_widths (P
+ 		     NULL}};
+   PangoGlyphItem glyph_item = {&item, glyphs};
+ 
+-  return pango_glyph_item_get_logical_widths (&glyph_item, text, logical_widths);
++  pango_glyph_item_get_logical_widths (&glyph_item, text, logical_widths);
+ }
+ 
+ /* The initial implementation here is script independent,
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-open-file-private.hh pango-1.25.5/pango/opentype/hb-open-file-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-open-file-private.hh	2009-08-15 00:43:57.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-open-file-private.hh	2009-08-27 14:43:28.948090920 +0200
+@@ -122,7 +122,7 @@ typedef struct OffsetTable
+   USHORT	searchRange;	/* (Maximum power of 2 <= numTables) x 16 */
+   USHORT	entrySelector;	/* Log2(maximum power of 2 <= numTables). */
+   USHORT	rangeShift;	/* NumTables x 16-searchRange. */
+-  TableDirectory tableDir[];	/* TableDirectory entries. numTables items */
++  TableDirectory *tableDir;	/* TableDirectory entries. numTables items */
+ } OpenTypeFontFace;
+ ASSERT_SIZE (OffsetTable, 12);
+ 
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-open-type-private.hh pango-1.25.5/pango/opentype/hb-open-type-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-open-type-private.hh	2009-08-20 00:16:39.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-open-type-private.hh	2009-08-27 14:43:28.944653853 +0200
+@@ -552,7 +552,7 @@ struct GenericArrayOf
+   }
+ 
+   LenType len;
+-  Type array[];
++  Type *array;
+ };
+ 
+ /* An array with a USHORT number of elements. */
+@@ -625,7 +625,7 @@ struct HeadlessArrayOf
+   }
+ 
+   USHORT len;
+-  Type array[];
++  Type *array;
+ };
+ 
+ 
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-common-private.hh pango-1.25.5/pango/opentype/hb-ot-layout-common-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-common-private.hh	2009-08-18 22:40:50.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-ot-layout-common-private.hh	2009-08-27 14:43:28.936022815 +0200
+@@ -295,7 +295,7 @@ struct Lookup
+   USHORT	lookupFlag;		/* Lookup qualifiers */
+   OffsetArrayOf<LookupSubTable>
+ 		subTable;		/* Array of SubTables */
+-  USHORT	markFilteringSetX[0];	/* Index (base 0) into GDEF mark glyph sets
++  USHORT	*markFilteringSetX;	/* Index (base 0) into GDEF mark glyph sets
+ 					 * structure. This field is only present if bit
+ 					 * UseMarkFilteringSet of lookup flags is set. */
+ };
+@@ -422,10 +422,14 @@ struct Coverage
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif 
+   USHORT		format;		/* Format identifier */
+-  CoverageFormat1	format1[];
+-  CoverageFormat2	format2[];
++  CoverageFormat1	*format1;
++  CoverageFormat2	*format2;
+   } u;
+ };
+ ASSERT_SIZE (Coverage, 2);
+@@ -538,10 +542,14 @@ struct ClassDef
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif 
+   USHORT		format;		/* Format identifier */
+-  ClassDefFormat1	format1[];
+-  ClassDefFormat2	format2[];
++  ClassDefFormat1	*format1;
++  ClassDefFormat2	*format2;
+   } u;
+ };
+ ASSERT_SIZE (ClassDef, 2);
+@@ -594,7 +602,7 @@ struct Device
+   USHORT	startSize;	/* Smallest size to correct--in ppem */
+   USHORT	endSize;	/* Largest size to correct--in ppem */
+   USHORT	deltaFormat;	/* Format of DeltaValue array data: 1, 2, or 3 */
+-  USHORT	deltaValue[];	/* Array of compressed data */
++  USHORT	*deltaValue;	/* Array of compressed data */
+ };
+ ASSERT_SIZE (Device, 6);
+ 
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gdef-private.hh pango-1.25.5/pango/opentype/hb-ot-layout-gdef-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gdef-private.hh	2009-08-18 22:41:05.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-ot-layout-gdef-private.hh	2009-08-27 14:43:28.936149592 +0200
+@@ -175,11 +175,15 @@ struct CaretValue
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  CaretValueFormat1	format1[];
+-  CaretValueFormat2	format2[];
+-  CaretValueFormat3	format3[];
++  CaretValueFormat1	*format1;
++  CaretValueFormat2	*format2;
++  CaretValueFormat3	*format3;
+   } u;
+ };
+ ASSERT_SIZE (CaretValue, 2);
+@@ -284,9 +288,13 @@ struct MarkGlyphSets
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  MarkGlyphSetsFormat1	format1[];
++  MarkGlyphSetsFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (MarkGlyphSets, 2);
+@@ -364,7 +372,7 @@ struct GDEF
+ 					 * mark attachment type--from beginning
+ 					 * of GDEF header (may be Null) */
+   OffsetTo<MarkGlyphSets>
+-		markGlyphSetsDef[0];	/* Offset to the table of mark set
++		*markGlyphSetsDef;	/* Offset to the table of mark set
+ 					 * definitions--from beginning of GDEF
+ 					 * header (may be NULL).  Introduced
+ 					 * in version 00010002. */
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gsub-private.hh pango-1.25.5/pango/opentype/hb-ot-layout-gsub-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gsub-private.hh	2009-08-18 22:41:20.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-ot-layout-gsub-private.hh	2009-08-27 14:43:28.941607196 +0200
+@@ -136,10 +136,14 @@ struct SingleSubst
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  SingleSubstFormat1	format1[];
+-  SingleSubstFormat2	format2[];
++  SingleSubstFormat1	*format1;
++  SingleSubstFormat2	*format2;
+   } u;
+ };
+ ASSERT_SIZE (SingleSubst, 2);
+@@ -241,9 +245,13 @@ struct MultipleSubst
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  MultipleSubstFormat1	format1[];
++  MultipleSubstFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (MultipleSubst, 2);
+@@ -335,9 +343,13 @@ struct AlternateSubst
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  AlternateSubstFormat1	format1[];
++  AlternateSubstFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (AlternateSubst, 2);
+@@ -517,9 +529,13 @@ struct LigatureSubst
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  LigatureSubstFormat1	format1[];
++  LigatureSubstFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (LigatureSubst, 2);
+@@ -650,9 +666,13 @@ struct ReverseChainSingleSubst
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT				format;		/* Format identifier */
+-  ReverseChainSingleSubstFormat1	format1[];
++  ReverseChainSingleSubstFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (ReverseChainSingleSubst, 2);
+@@ -710,16 +730,20 @@ struct SubstLookupSubTable
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT			format;
+-  SingleSubst			single[];
+-  MultipleSubst			multiple[];
+-  AlternateSubst		alternate[];
+-  LigatureSubst			ligature[];
+-  ContextSubst			context[];
+-  ChainContextSubst		chainContext[];
+-  ExtensionSubst		extension[];
+-  ReverseChainSingleSubst	reverseChainContextSingle[];
++  SingleSubst			*single;
++  MultipleSubst			*multiple;
++  AlternateSubst		*alternate;
++  LigatureSubst			*ligature;
++  ContextSubst			*context;
++  ChainContextSubst		*chainContext;
++  ExtensionSubst		*extension;
++  ReverseChainSingleSubst	*reverseChainContextSingle;
+   } u;
+ };
+ ASSERT_SIZE (SubstLookupSubTable, 2);
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gsubgpos-private.hh pango-1.25.5/pango/opentype/hb-ot-layout-gsubgpos-private.hh
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-ot-layout-gsubgpos-private.hh	2009-08-15 00:43:57.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-ot-layout-gsubgpos-private.hh	2009-08-27 14:43:28.938297637 +0200
+@@ -278,9 +278,9 @@ struct Rule
+ 					 * glyph sequence--includes the  first
+ 					 * glyph */
+   USHORT	lookupCount;		/* Number of LookupRecords */
+-  USHORT	input[];		/* Array of match inputs--start with
++  USHORT	*input;			/* Array of match inputs--start with
+ 					 * second glyph */
+-  LookupRecord	lookupRecordX[];	/* Array of LookupRecords--in
++  LookupRecord	*lookupRecordX;		/* Array of LookupRecords--in
+ 					 * design order */
+ };
+ ASSERT_SIZE (Rule, 4);
+@@ -429,9 +429,9 @@ struct ContextFormat3
+ 					 * sequence */
+   USHORT	lookupCount;		/* Number of LookupRecords */
+   OffsetTo<Coverage>
+-		coverage[];		/* Array of offsets to Coverage
++		*coverage;		/* Array of offsets to Coverage
+ 					 * table in glyph sequence order */
+-  LookupRecord	lookupRecordX[];	/* Array of LookupRecords--in
++  LookupRecord	*lookupRecordX;		/* Array of LookupRecords--in
+ 					 * design order */
+ };
+ ASSERT_SIZE (ContextFormat3, 6);
+@@ -461,11 +461,15 @@ struct Context
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  ContextFormat1	format1[];
+-  ContextFormat2	format2[];
+-  ContextFormat3	format3[];
++  ContextFormat1	*format1;
++  ContextFormat2	*format2;
++  ContextFormat3	*format3;
+   } u;
+ };
+ ASSERT_SIZE (Context, 2);
+@@ -768,11 +772,15 @@ struct ChainContext
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif 
+   USHORT		format;	/* Format identifier */
+-  ChainContextFormat1	format1[];
+-  ChainContextFormat2	format2[];
+-  ChainContextFormat3	format3[];
++  ChainContextFormat1	*format1;
++  ChainContextFormat2	*format2;
++  ChainContextFormat3	*format3;
+   } u;
+ };
+ ASSERT_SIZE (ChainContext, 2);
+@@ -836,9 +844,13 @@ struct Extension
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  ExtensionFormat1	format1[];
++  ExtensionFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (Extension, 2);
+diff -rup SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-private.h pango-1.25.5/pango/opentype/hb-private.h
+--- SUNWpango-1.25.5/i386/pango-1.25.5/pango/opentype/hb-private.h	2009-08-20 00:06:54.000000000 +0200
++++ pango-1.25.5/pango/opentype/hb-private.h	2009-08-27 14:43:28.938425047 +0200
+@@ -128,7 +128,11 @@ typedef GStaticMutex hb_mutex_t;
+ #define _ASSERT_STATIC0(_line, _cond) _ASSERT_STATIC1 (_line, (_cond))
+ #define ASSERT_STATIC(_cond) _ASSERT_STATIC0 (__LINE__, (_cond))
+ 
++#ifdef __SUNPRO_CC
++#define ASSERT_SIZE(_type, _size) 
++#else
+ #define ASSERT_SIZE(_type, _size) ASSERT_STATIC (sizeof (_type) == (_size))
++#endif
+ 
+ 
+ #if defined(__GNUC__) && (__GNUC__ > 2) && defined(__OPTIMIZE__)
+--- pango-1.25.6/pango/opentype/hb-ot-layout-gpos-private.hh.ori	2009-09-09 08:54:33.906670402 +0100
++++ pango-1.25.6/pango/opentype/hb-ot-layout-gpos-private.hh	2009-09-09 09:06:18.429960859 +0100
+@@ -35,7 +35,7 @@
+ 
+ typedef SHORT Value;
+ 
+-typedef Value ValueRecord[0];
++typedef Value *ValueRecord;
+ ASSERT_SIZE (ValueRecord, 0);
+ 
+ struct ValueFormat : USHORT
+@@ -257,11 +257,15 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  AnchorFormat1		format1[];
+-  AnchorFormat2		format2[];
+-  AnchorFormat3		format3[];
++  AnchorFormat1		*format1;
++  AnchorFormat2		*format2;
++  AnchorFormat3		*format3;
+   } u;
+ };
+ ASSERT_SIZE (Anchor, 2);
+@@ -287,7 +291,7 @@
+   USHORT	rows;			/* Number of rows */
+   private:
+   OffsetTo<Anchor>
+-		matrix[];		/* Matrix of offsets to Anchor tables--
++		*matrix;		/* Matrix of offsets to Anchor tables--
+ 					 * from beginning of AnchorMatrix table */
+ };
+ ASSERT_SIZE (AnchorMatrix, 2);
+@@ -459,10 +463,14 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  SinglePosFormat1	format1[];
+-  SinglePosFormat2	format2[];
++  SinglePosFormat1	*format1;
++  SinglePosFormat2	*format2;
+   } u;
+ };
+ ASSERT_SIZE (SinglePos, 2);
+@@ -495,7 +503,7 @@
+   private:
+   USHORT	len;			/* Number of PairValueRecords */
+   PairValueRecord
+-		array[];		/* Array of PairValueRecords--ordered
++		*array;		/* Array of PairValueRecords--ordered
+ 					 * by GlyphID of the second glyph */
+ };
+ ASSERT_SIZE (PairSet, 2);
+@@ -531,7 +539,7 @@
+     unsigned int record_len = 1 + len1 + len2;
+ 
+     unsigned int count = pair_set.len;
+-    const PairValueRecord *record = pair_set.array;
++    PairValueRecord *record = pair_set.array;
+     for (unsigned int i = 0; i < count; i++)
+     {
+       if (IN_GLYPH (j) == record->secondGlyph)
+@@ -682,10 +690,14 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  PairPosFormat1	format1[];
+-  PairPosFormat2	format2[];
++  PairPosFormat1	*format1;
++  PairPosFormat2	*format2;
+   } u;
+ };
+ ASSERT_SIZE (PairPos, 2);
+@@ -929,9 +941,13 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  CursivePosFormat1	format1[];
++  CursivePosFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (CursivePos, 2);
+@@ -1025,9 +1041,13 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  MarkBasePosFormat1	format1[];
++  MarkBasePosFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (MarkBasePos, 2);
+@@ -1150,9 +1170,13 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  MarkLigPosFormat1	format1[];
++  MarkLigPosFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (MarkLigPos, 2);
+@@ -1251,9 +1275,13 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;		/* Format identifier */
+-  MarkMarkPosFormat1	format1[];
++  MarkMarkPosFormat1	*format1;
+   } u;
+ };
+ ASSERT_SIZE (MarkMarkPos, 2);
+@@ -1360,17 +1388,21 @@
+   }
+ 
+   private:
++#ifdef __SUNPRO_CC
++  struct {
++#else
+   union {
++#endif
+   USHORT		format;
+-  SinglePos		single[];
+-  PairPos		pair[];
+-  CursivePos		cursive[];
+-  MarkBasePos		markBase[];
+-  MarkLigPos		markLig[];
+-  MarkMarkPos		markMark[];
+-  ContextPos		context[];
+-  ChainContextPos	chainContext[];
+-  ExtensionPos		extension[];
++  SinglePos		*single;
++  PairPos		*pair;
++  CursivePos		*cursive;
++  MarkBasePos		*markBase;
++  MarkLigPos		*markLig;
++  MarkMarkPos		*markMark;
++  ContextPos		*context;
++  ChainContextPos	*chainContext;
++  ExtensionPos		*extension;
+   } u;
+ };
+ ASSERT_SIZE (PosLookupSubTable, 2);

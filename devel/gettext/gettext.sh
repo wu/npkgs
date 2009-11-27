@@ -9,6 +9,8 @@ PREREQS="m4"
 # source common envs
 . ../../common.sh
 
+export CC=gcc
+
 common_fetch
 common_prereqs
 common_clean

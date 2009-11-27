@@ -1,10 +1,9 @@
 #!/bin/bash
 
-PKG_NAME="cairo"
-PACKAGE="$PKG_NAME-1.8.8"
-TARBALL="$PACKAGE.tar.gz"
-URL="http://cairographics.org/releases/$TARBALL"
-PREREQS="pixman freetype1 fontconfig glib"
+PKG_NAME="jasper"
+PACKAGE="$PKG_NAME-1.900.1"
+TARBALL="$PACKAGE.zip"
+URL="http://www.ece.uvic.ca/~mdadams/jasper/software/$TARBALL"
 
 # source common envs
 . ../../common.sh
@@ -12,7 +11,7 @@ PREREQS="pixman freetype1 fontconfig glib"
 common_fetch
 common_prereqs
 common_clean
-common_untar
+common_unzip
 
 # build and install
 cd $PACKAGE                          || exit

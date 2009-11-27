@@ -5,6 +5,7 @@ then
   exit 1
 fi
 
+FORCE_ORIG=$FORCE
 LD_CONFIG_ORIG=$LD_CONFIG
 
 # save some env vars
@@ -33,4 +34,9 @@ then
     echo
     echo "RESET CUSTOM LD_CONFIG: $LD_CONFIG"
     echo
+fi
+
+if [ ! -z "$FORCE_ORIG" ]
+then
+    FORCE=$FORCE_ORIG
 fi

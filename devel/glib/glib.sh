@@ -1,9 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="glib"
-PACKAGE="$PKG_NAME-2.19.9"
+PKG_VERSION="2.22"
+PACKAGE="$PKG_NAME-$PKG_VERSION.2"
 TARBALL="$PACKAGE.tar.gz"
-URL="ftp://ftp.gtk.org/pub/glib/2.19/$TARBALL"
+URL="ftp://ftp.gtk.org/pub/glib/$PKG_VERSION/$TARBALL"
 PREREQS="gettext libiconv"
 
 # source common envs
