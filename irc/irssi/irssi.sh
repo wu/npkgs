@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="irssi"
-PACKAGE="$PKG_NAME-0.8.13"
+PACKAGE="$PKG_NAME-0.8.14"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://irssi.org/files/$TARBALL"
 
@@ -10,6 +10,7 @@ PREREQS="pkg-config glib ncurses"
 # source common envs
 . ../../common.sh
 
+export CC=gcc
 CONFIGURE="$CONFIGURE --with-perl=yes --without-socks --without-bot --with-proxy --with-textui --disable-largefile --disable-ssl --with-perl-lib=site"
 
 # if this is opensolaris, force use of our own glib!
