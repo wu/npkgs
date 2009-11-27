@@ -1,0 +1,11 @@
+--- perl-core.c.orig	2009-04-05 16:56:18.000000000 +0200
++++ perl-core.c	2009-04-05 17:00:35.000000000 +0200
+@@ -442,6 +442,7 @@
+ {
+ 	int argc = G_N_ELEMENTS(perl_args);
+ 	char **argv = perl_args;
++	char **environ = NULL;
+ 
+ 	PERL_SYS_INIT3(&argc, &argv, &environ);
+         print_script_errors = 1;
+
