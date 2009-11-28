@@ -1,5 +1,7 @@
 #!/usr/local/bin/perl -w
 use strict;
+
+use File::Path;
 use Term::ANSIColor;
 
 $| = 1;
@@ -20,6 +22,9 @@ if ( $action eq "install" ) {
         install_package( $package );
     }
 }
+elsif ( $action eq "link" ) {
+    link_package( @ARGV );
+}
 elsif ( $action eq "deadlinks" ) {
     print `find $npkg_prefix -type l ! -xtype f ! -xtype d -ls -exec rm {} \\;`;
 }
@@ -34,6 +39,69 @@ print "DONE\n\n";
 #
 #_* methods
 #
+
+sub link_package {
+    my ( $package ) = @_;
+
+    print "\n", ">"x77, "\n";
+    print "Linking package: $package\n";
+
+    my $path = "$npkg_prefix/root/$package";
+    print "PATH: $path\n";
+    unless ( -r $path ) { die "ERROR: path not found: $path\n" }
+
+    my $installed = readlink( $path );
+    print "INSTALLED: $installed\n\n";
+    unless ( -r $installed ) { die "ERROR: installed path not found: $installed\n" }
+
+    my $version = $installed;
+    $version =~ s|^$npkg_prefix/root/||;
+
+    # run command capturing output
+    open my $run, "-|", "find $path/ -type f 2>&1" or die "Unable to execute find in $installed: $!";
+  ENTRY:
+    while ( my $entry = <$run> )
+    {
+      chomp $entry;
+      print $entry, " ... " if $debug;
+
+      my $symlink = $entry;
+      $symlink =~ s|^$path/|$npkg_prefix/|;
+
+      if ( -r $symlink ) {
+          print "Already exists: $symlink ... " if $debug;
+          my $already_target = readlink( $symlink );
+
+          if ( $already_target eq $entry ) {
+              print "\tAlready linked to $entry" if $debug;
+              next ENTRY;
+          }
+          else {
+              print "\tunlinking $entry from $already_target\n";
+              unlink( $symlink );
+          }
+      }
+
+      my $dir = $symlink;
+      $dir =~ s|^(.*)/.*?$|$1|;
+      unless ( -d $dir ) {
+          print "Creating directory: $dir\n";
+          mkpath( $dir );
+      }
+      #print "\tLinking...\n";
+      print "ln -s $entry $symlink\n" if $debug;
+      print `ln -s $entry $symlink`;
+    }
+    close $run;
+
+    # check exit status
+    unless ( $? eq 0 ) {
+      my $status = $? >> 8;
+      my $signal = $? & 127;
+      die "Error finding files in $installed!\n\tstatus=$status\n\tsignal=$signal";
+    }
+
+}
 
 sub install_package {
     my ( $package ) = @_;
@@ -150,7 +218,7 @@ sub install_package {
       }
     }
     close $run;
-    
+
     # check exit status
     unless ( $? eq 0 ) {
       my $status = $? >> 8;
@@ -161,4 +229,3 @@ sub install_package {
     print "Removing work directory for $package...\n";
     system( "cd $path && rm -rf work/" );
 }
-
