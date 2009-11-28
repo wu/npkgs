@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="gnupg"
-PACKAGE="$PKG_NAME-1.4.9"
+PACKAGE="$PKG_NAME-1.4.10"
 TARBALL="$PACKAGE.tar.bz2"
 URL="ftp://ftp.gnupg.org/gcrypt/gnupg/$TARBALL"
 
