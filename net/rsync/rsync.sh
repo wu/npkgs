@@ -8,7 +8,7 @@ URL="http://samba.anu.edu.au/ftp/rsync/src/$TARBALL"
 # source common envs
 . ../../common.sh
 
-#common_fetch
+common_fetch
 common_prereqs
 common_fetch
 common_clean
