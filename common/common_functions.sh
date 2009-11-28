@@ -181,6 +181,11 @@ function common_patch
 
 function common_install_links
 {
+    if [ ! -z "$NPKGS_CONTEXT" ]; then
+      echo "Running in context of npkgs, no symlinks created"
+      return;
+    fi
+
     if [ -z "$PKG_PREFIX" ]; then
       echo "ERROR: PKG_PREFIX not set!"
       return;

@@ -7,6 +7,7 @@ fi
 
 FORCE_ORIG=$FORCE
 LD_CONFIG_ORIG=$LD_CONFIG
+NPKGS_CONTEXT_ORIG=$NPKGS_CONTEXT
 
 # save some env vars
 export HOSTNAME=$HOST
@@ -36,7 +37,5 @@ then
     echo
 fi
 
-if [ ! -z "$FORCE_ORIG" ]
-then
-    FORCE=$FORCE_ORIG
-fi
+FORCE=$FORCE_ORIG
+NPKGS_CONTEXT=$NPKGS_CONTEXT_ORIG

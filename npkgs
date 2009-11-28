@@ -7,6 +7,9 @@ use Term::ANSIColor;
 $| = 1;
 my $debug = 0;
 
+# let child processes know they're running in the context of this script
+$ENV{NPKGS_CONTEXT} = $0;
+
 my $npkg_prefix = $ENV{NPKG_PREFIX} || "/usr/local";
 print "PREFIX: $npkg_prefix\n" if $debug;
 
@@ -25,7 +28,7 @@ if ( $action eq "install" ) {
 elsif ( $action eq "link" ) {
     link_package( @ARGV );
 }
-elsif ( $action eq "deadlinks" ) {
+elsif ( $action eq "dead" ) {
     print `find $npkg_prefix -type l ! -xtype f ! -xtype d -ls -exec rm {} \\;`;
 }
 else {
@@ -228,4 +231,6 @@ sub install_package {
 
     print "Removing work directory for $package...\n";
     system( "cd $path && rm -rf work/" );
+
+    link_package( $package );
 }
