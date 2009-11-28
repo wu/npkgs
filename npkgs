@@ -123,8 +123,8 @@ sub install_package {
           print color 'reset';
           print "$2\n";
       }
-      elsif ( $line =~ m|^\S*\s*\S+libtool | ) {
-          $line =~ m|^(\S*\s*\S+libtool) (.*)$|;
+      elsif ( $line =~ m|^\s*\S*\s*\S+libtool | ) {
+          $line =~ m|^(\s*\S*\s*\S+libtool) (.*)$|;
           print color 'magenta';
           print "$1 ";
           print color 'reset';
@@ -135,12 +135,12 @@ sub install_package {
           print "$line\n";
           print color 'reset';
       }
-      elsif ( $line =~ m|warning|i && $line !~ m|seems to be moved| ) {
+      elsif ( $line =~ m|warning[:\s]|i && $line !~ m|seems to be moved| ) {
           print color 'bold yellow';
           print "$line\n";
           print color 'reset';
       }
-      elsif ( $line =~ m|error|i ) {
+      elsif ( $line =~ m|error[:\s]|i ) {
           print color 'bold red';
           print "$line\n";
           print color 'reset';
