@@ -10,6 +10,7 @@ URL="ftp://xmlsoft.org/libxml2/$TARBALL"
 
 #common_fetch
 common_prereqs
+common_fetch
 common_clean
 common_untar
 

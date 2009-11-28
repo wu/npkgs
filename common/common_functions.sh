@@ -61,6 +61,8 @@ function common_fetch
         echo "ACQUIRING TARBALL: $TARBALL..."
         $WGET $URL
         mv $TARBALL $DISTFILES/
+    else
+        echo "Already downloaded: $DISTFILES/$TARBALL"
     fi
 
 }
