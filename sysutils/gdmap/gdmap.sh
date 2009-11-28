@@ -5,7 +5,7 @@ PKG_VERSION="0.8.1"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://downloads.sourceforge.net/project/gdmap/gdmap/$PKG_VERSION/$TARBALL"
-PREREQS="perl libxml2"
+PREREQS="perl libxml2 gtk+"
 
 # source common envs
 . ../../common.sh

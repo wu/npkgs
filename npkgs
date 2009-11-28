@@ -5,7 +5,7 @@ use Term::ANSIColor;
 $| = 1;
 my $debug = 0;
 
-my $npkg_prefix = $ENV{NPKG_PREFIX};
+my $npkg_prefix = $ENV{NPKG_PREFIX} || "/usr/local";
 print "PREFIX: $npkg_prefix\n" if $debug;
 
 
