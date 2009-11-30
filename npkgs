@@ -44,56 +44,71 @@ print "DONE\n\n";
 #
 
 sub link_package {
-    my ( $package ) = @_;
+    my ( $package, $version ) = @_;
 
     print "\n", ">"x77, "\n";
     print "Linking package: $package\n";
 
     my $path = "$npkg_prefix/root/$package";
     print "PATH: $path\n";
-    unless ( -r $path ) { die "ERROR: path not found: $path\n" }
 
-    my $installed = readlink( $path );
-    print "INSTALLED: $installed\n\n";
-    unless ( -r $installed ) { die "ERROR: installed path not found: $installed\n" }
+    my $installed;
+    if ( $version ) {
+        $installed = join "/", $npkg_prefix, 'root', $version;
 
-    my $version = $installed;
-    $version =~ s|^$npkg_prefix/root/||;
+        if ( -r $path ) {
+            print "Removing symlink pointing to: ", readlink( $path );
+            unlink ( $path );
+        }
+
+        print "Linking $installed to $path\n";
+        system( "ln", "-s", $installed, $path );
+    }
+    else {
+        unless ( -r $path ) { die "ERROR: path not found: $path\n" }
+
+        $installed = readlink( $path );
+
+        print "INSTALLED: $installed\n\n";
+        unless ( -r $installed ) { die "ERROR: installed path not found: $installed\n" }
+
+        $version = $installed;
+        $version =~ s|^$npkg_prefix/root/||;
+    }
+
 
     # run command capturing output
     open my $run, "-|", "find $path/ -type f 2>&1" or die "Unable to execute find in $installed: $!";
   ENTRY:
-    while ( my $entry = <$run> )
-    {
-      chomp $entry;
-      print $entry, " ... " if $debug;
+    while ( my $entry = <$run> ) {
+        chomp $entry;
+        print $entry, " ... " if $debug;
 
-      my $symlink = $entry;
-      $symlink =~ s|^$path/|$npkg_prefix/|;
+        my $symlink = $entry;
+        $symlink =~ s|^$path/|$npkg_prefix/|;
 
-      if ( -r $symlink ) {
-          print "Already exists: $symlink ... " if $debug;
-          my $already_target = readlink( $symlink );
+        if ( -r $symlink ) {
+            print "Already exists: $symlink ... " if $debug;
+            my $already_target = readlink( $symlink );
 
-          if ( $already_target eq $entry ) {
-              print "\tAlready linked to $entry" if $debug;
-              next ENTRY;
-          }
-          else {
-              print "\tunlinking $entry from $already_target\n";
-              unlink( $symlink );
-          }
-      }
+            if ( $already_target && $already_target eq $entry ) {
+                print "\tAlready linked to $entry" if $debug;
+                next ENTRY;
+            } else {
+                print "\tunlinking $entry from $already_target\n";
+                unlink( $symlink );
+            }
+        }
 
-      my $dir = $symlink;
-      $dir =~ s|^(.*)/.*?$|$1|;
-      unless ( -d $dir ) {
-          print "Creating directory: $dir\n";
-          mkpath( $dir );
-      }
-      #print "\tLinking...\n";
-      print "ln -s $entry $symlink\n" if $debug;
-      print `ln -s $entry $symlink`;
+        my $dir = $symlink;
+        $dir =~ s|^(.*)/.*?$|$1|;
+        unless ( -d $dir ) {
+            print "Creating directory: $dir\n";
+            mkpath( $dir );
+        }
+        #print "\tLinking...\n";
+        print "ln -s $entry $symlink\n" if $debug;
+        print `ln -s $entry $symlink`;
     }
     close $run;
 
@@ -126,6 +141,8 @@ sub install_package {
     #}
 
     print "Executing: $package.sh in $path\n";
+
+    my $package_version;
 
     # run command capturing output
     open my $run, "-|", "cd $path && ./$package.sh 2>&1" or die "Unable to execute package installer: $package: $!";
@@ -216,6 +233,10 @@ sub install_package {
           print "$line\n";
           print color 'reset';
       }
+      elsif ( $line =~ m|^PACKAGE\:\s+| ) {
+          $line =~ m|^PACKAGE\:\s+(.*)\s*$|;
+          $package_version = $1;
+      }
       else {
           print "$line\n";
       }
@@ -232,5 +253,5 @@ sub install_package {
     print "Removing work directory for $package...\n";
     system( "cd $path && rm -rf work/" );
 
-    link_package( $package );
+    link_package( $package, $package_version );
 }
