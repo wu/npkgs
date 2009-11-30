@@ -5,7 +5,7 @@ PKG_VERSION="1.26"
 PACKAGE="$PKG_NAME-$PKG_VERSION.1"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://ftp.gnome.org/pub/gnome/sources/pango/$PKG_VERSION/$TARBALL"
-PREREQS="cairo automake"
+PREREQS="cairo automake autoconf"
 
 # source common envs
 . ../../common.sh
