@@ -11,8 +11,6 @@ URL="http://untroubled.org/nullmailer/$TARBALL"
 export CC=gcc
 export CXX=g++
 
-#CONFIGURE="$CONFIGURE --with-ssl=$PREFIX/root/openssl --enable-mailtool --enable-imap"
-
 common_fetch
 common_prereqs
 common_clean
