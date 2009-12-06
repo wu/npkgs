@@ -57,7 +57,7 @@ sub link_package {
         $installed = join "/", $npkg_prefix, 'root', $version;
 
         if ( -r $path ) {
-            print "Removing symlink pointing to: ", readlink( $path );
+            print "Removing symlink pointing to: ", readlink( $path ), "\n";
             unlink ( $path );
         }
 
