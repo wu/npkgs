@@ -3,19 +3,25 @@
 PKG_NAME="nagios"
 PACKAGE="$PKG_NAME-3.2.0"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://superb-east.dl.sourceforge.net/sourceforge/nagios/$TARBALL"
+URL="http://prdownloads.sourceforge.net/sourceforge/$PKG_NAME/$TARBALL"
 PREREQS="make"
 
 # source common envs
 . ../../common.sh
 
-export CC=gcc
-export MAKE=gmake
-
+# required vars
 [ -z "$NAGIOS_USER" ] && echo "you must set NAGIOS_USER, probably in $NPKG_PATH/common/host/$HOST_SHORT.sh" && exit
 [ -z "$NAGIOS_GROUP" ] && echo "you must set NAGIOS_GROUP, probably in $NPKG_PATH/common/host/$HOST_SHORT.sh" && exit
 
-CONFIGURE="$CONFIGURE --with-nagios-user=$NAGIOS_USER --with-nagios-group=$NAGIOS_GROUP"
+export CC=gcc
+export MAKE=gmake
+
+CONFIGURE="$CONFIGURE --with-nagios-user=$NAGIOS_USER --with-nagios-group=$NAGIOS_GROUP --enable-nanosleep"
+
+if [ "$OS" = "SunOS" ]
+then
+  export LIBS="-lsocket $LIBS"
+fi
 
 common_fetch
 common_prereqs
