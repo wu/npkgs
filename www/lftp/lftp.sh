@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="lftp"
-PACKAGE="$PKG_NAME-4.0.3"
+PACKAGE="$PKG_NAME-4.0.5"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.yars.free.net/pub/source/lftp/$TARBALL"
 PREREQS="openssl readline"
@@ -9,6 +9,8 @@ PREREQS="openssl readline"
 # source common envs
 . ../../common.sh
 
+export CC=gcc
+export CXX=g++
 CONFIGURE="$CONFIGURE --with-openssl=$PREFIX/root/openssl"
 
 common_fetch
