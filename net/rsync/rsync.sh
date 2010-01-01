@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="rsync"
-PACKAGE="$PKG_NAME-3.0.6"
+PACKAGE="$PKG_NAME-3.0.7"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://samba.anu.edu.au/ftp/rsync/src/$TARBALL"
 
