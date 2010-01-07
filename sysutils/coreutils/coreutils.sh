@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="coreutils"
-PACKAGE="$PKG_NAME-8.2"
+PACKAGE="$PKG_NAME-8.3"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/coreutils/$TARBALL"
 PREREQ="patch"
