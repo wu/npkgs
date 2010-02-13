@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="git"
-PKG_VERSION="1.6.6.2"
+PKG_VERSION="1.7.0"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.kernel.org/pub/software/scm/git/$TARBALL"
