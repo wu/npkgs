@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="diffutils"
-PACKAGE="$PKG_NAME-2.8.1"
+PACKAGE="$PKG_NAME-2.9"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/diffutils/$TARBALL"
 
