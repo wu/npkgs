@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="openssl"
-PACKAGE="$PKG_NAME-0.9.8l"
+PACKAGE="$PKG_NAME-0.9.8m"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.openssl.org/source/$TARBALL"
 PREREQS="make"
