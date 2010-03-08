@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="binutils"
-PACKAGE="$PKG_NAME-2.19"
+PACKAGE="$PKG_NAME-2.20.1"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/gnu/binutils/$TARBALL"
 
