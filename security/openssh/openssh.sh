@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="openssh"
-PACKAGE="$PKG_NAME-5.3p1"
+PACKAGE="$PKG_NAME-5.4p1"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://mirror.planetunix.net/pub/OpenBSD/OpenSSH/portable/$TARBALL"
 
