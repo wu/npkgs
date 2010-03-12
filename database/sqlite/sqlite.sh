@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# UPDATE: 3.6.23 is broken on OS X!
-
 PKG_NAME="sqlite"
-PKG_VER="3.6.22"
+PKG_VER="3.6.23"
 PACKAGE="$PKG_NAME-$PKG_VER"
 TARBALL="$PKG_NAME-amalgamation-$PKG_VER.tar.gz"
 URL="http://www.sqlite.org/$TARBALL"
