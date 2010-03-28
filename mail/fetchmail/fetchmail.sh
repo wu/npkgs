@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="fetchmail"
-PACKAGE="$PKG_NAME-6.3.14"
+PACKAGE="$PKG_NAME-6.3.15"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://download.berlios.de/fetchmail/$TARBALL"
 
