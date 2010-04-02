@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="sqlite"
-PKG_VER="3.6.23"
+PKG_VER="3.6.23.1"
 PACKAGE="$PKG_NAME-$PKG_VER"
 TARBALL="$PKG_NAME-amalgamation-$PKG_VER.tar.gz"
 URL="http://www.sqlite.org/$TARBALL"
