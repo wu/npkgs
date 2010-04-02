@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="grep"
-PACKAGE="$PKG_NAME-2.6.1"
+PACKAGE="$PKG_NAME-2.6.3"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/$PKG_NAME/$TARBALL"
 
