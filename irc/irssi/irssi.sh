@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="irssi"
-PACKAGE="$PKG_NAME-0.8.14"
+PACKAGE="$PKG_NAME-0.8.15"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://irssi.org/files/$TARBALL"
 
