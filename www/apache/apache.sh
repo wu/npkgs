@@ -13,7 +13,7 @@ CONFIGURE="$CONFIGURE --enable-mods-shared=all --enable-cgid \
                       --enable-expires --disable-userdir --enable-rewrite \
                       --enable-proxy --enable-nonportable-atomics \
                       --with-included-apr --enable-cgi \
-                      --with-mpm=worker --with-ssl=$PREFIX/root/openssl "
+                      --with-mpm=worker --enable-ssl --with-ssl=$PREFIX/root/openssl "
 
 
 common_fetch
