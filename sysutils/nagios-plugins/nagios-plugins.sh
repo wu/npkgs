@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="nagios-plugins"
-PACKAGE="$PKG_NAME-1.4.14"
+PACKAGE="$PKG_NAME-1.4.15"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://prdownloads.sourceforge.net/sourceforge/nagiosplug/$TARBALL"
 PREREQS="openssl nagios"
