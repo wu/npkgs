@@ -33,5 +33,13 @@ common_untar
 cd $PACKAGE                        || exit
 
 common_configure
+
+# check_ping is broken on solaris, see http://www.mernin.com/blog/?p=118
+if [ "$OS" = "SunOS" ]
+then
+  perl -pi -e's|^#define PING_COMMAND.*$|#define PING_COMMAND "/usr/sbin/ping -s %s 64 %u"|' config.h
+  grep PING config.h
+fi
+
 common_make all
 common_install
