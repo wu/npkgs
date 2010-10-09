@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="make"
-PACKAGE="$PKG_NAME-3.81"
+PACKAGE="$PKG_NAME-3.82"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/gnu/make/$TARBALL"
 
