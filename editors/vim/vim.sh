@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="vim"
-PACKAGE="$PKG_NAME-7.2"
+PACKAGE="$PKG_NAME-7.3"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://ftp.vim.org/pub/vim/unix/$TARBALL"
 
@@ -16,7 +16,7 @@ common_clean
 common_untar_bzip
 
 # build and install
-cd vim72                             || exit
+cd vim73                             || exit
 
 common_configure
 common_make
