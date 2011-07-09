@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="subversion"
-PACKAGE="$PKG_NAME-1.6.6"
+PACKAGE="$PKG_NAME-1.6.17"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://subversion.tigris.org/downloads/$TARBALL"
 PREREQS="swig neon libiconv apache"
@@ -30,12 +30,12 @@ common_configure
 common_make
 common_install
 
-echo
-echo INSTALLING PERL BINDINGS
-echo
-make swig-pl || exit
-make check-swig-pl || exit
-make install-swig-pl || exit
+#echo
+#echo INSTALLING PERL BINDINGS
+#echo
+#make swig-pl || exit
+#make check-swig-pl || exit
+#make install-swig-pl || exit
 
 echo
 echo
