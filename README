@@ -72,12 +72,12 @@ INSTALLING
 1. clone the git project
 
   cd /home/me
-  git clone git://github.com/wu/wuports.git
+  git clone git://github.com/wu/npkgs.git
 
 2. set up some environment variables
 
   export NPKG_PREFIX="/usr/foo"
-  export NPKG_PATH="/home/me/wuports"
+  export NPKG_PATH="/home/me/npkgs"
   export PATH="/usr/foo/bin:/usr/foo/sbin:$PATH"
 
 3. set up any custom config for your host or O/S (see the examples)
