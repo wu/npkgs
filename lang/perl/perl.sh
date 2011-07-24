@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="perl"
-PACKAGE="$PKG_NAME-5.10.1"
+PACKAGE="$PKG_NAME-5.14.1"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.perl.com/CPAN/src/$TARBALL"
 
