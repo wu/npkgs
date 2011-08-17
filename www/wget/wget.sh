@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PKG_NAME="wget"
-PACKAGE="$PKG_NAME-1.12"
+#PACKAGE="$PKG_NAME-1.13.1"
+PACKAGE="$PKG_NAME-1.13"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/gnu/wget/$TARBALL"
 PREREQS="openssl"
@@ -9,7 +10,7 @@ PREREQS="openssl"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-ssl=yes --with-libssl-prefix=$PREFIX/root/openssl"
+CONFIGURE="$CONFIGURE --with-ssl=openssl --with-libssl-prefix=$PREFIX/root/openssl"
 
 common_fetch
 common_prereqs
