@@ -1,8 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="wget"
-#PACKAGE="$PKG_NAME-1.13.1"
-PACKAGE="$PKG_NAME-1.13"
+PACKAGE="$PKG_NAME-1.13.3"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/gnu/wget/$TARBALL"
 PREREQS="openssl"
