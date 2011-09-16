@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="apache"
-PACKAGE="httpd-2.2.15"
+PACKAGE="httpd-2.2.21"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://archive.apache.org/dist/httpd/$TARBALL"
 
