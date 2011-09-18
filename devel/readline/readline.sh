@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="readline"
-PACKAGE="$PKG_NAME-6.0"
+PACKAGE="$PKG_NAME-6.2"
 TARBALL="$PACKAGE.tar.gz"
 URL="ftp://ftp.cwru.edu/pub/bash/$TARBALL"
 
