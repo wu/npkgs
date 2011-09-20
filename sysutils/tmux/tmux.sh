@@ -6,6 +6,8 @@ PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://downloads.sourceforge.net/$PKG_NAME/$TARBALL"
 
+PREREQS="libevent"
+
 # source common envs
 . ../../common.sh
 
