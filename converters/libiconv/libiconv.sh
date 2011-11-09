@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="libiconv"
-PACKAGE="$PKG_NAME-1.12"
+PACKAGE="$PKG_NAME-1.14"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/libiconv/$TARBALL"
 

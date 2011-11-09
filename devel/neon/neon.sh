@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="neon"
-PACKAGE="$PKG_NAME-0.29.0"
+PACKAGE="$PKG_NAME-0.29.6"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.webdav.org/neon/$TARBALL"
 PREREQS="openssl expat"

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 PKG_NAME="swig"
-PACKAGE="$PKG_NAME-1.3.31"
+PACKAGE="$PKG_NAME-2.0.4"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://easynews.dl.sourceforge.net/sourceforge/swig/$TARBALL"
+URL="http://downloads.sourceforge.net/project/swig/swig/$PACKAGE/$TARBALL"
 
 #PREREQS="perl ruby python make"
-PREREQS="perl make"
+PREREQS="perl make pcre"
 
 # source common envs
 . ../../common.sh

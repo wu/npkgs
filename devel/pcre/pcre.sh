@@ -1,9 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="pcre"
-PACKAGE="$PKG_NAME-8.10"
+PKG_VER="8.20"
+PACKAGE="$PKG_NAME-$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://easynews.dl.sourceforge.net/sourceforge/$PKG_NAME/$TARBALL"
+URL="http://downloads.sourceforge.net/project/pcre/pcre/$PKG_VER/$TARBALL"
 
 # source common envs
 . ../../common.sh
