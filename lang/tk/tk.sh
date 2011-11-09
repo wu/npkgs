@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="tk"
-PACKAGE="${PKG_NAME}8.5.8"
+PACKAGE="${PKG_NAME}8.5.9"
 TARBALL="$PACKAGE-src.tar.gz"
 URL="http://prdownloads.sourceforge.net/tcl/$TARBALL"
 PREREQS="tcl"
@@ -9,7 +9,7 @@ PREREQS="tcl"
 # source common envs
 . ../../common.sh
 
-CONFIGURE="$CONFIGURE --with-tcl=$PREFIX/root/tcl/lib --enable-threads"
+CONFIGURE="$CONFIGURE --with-tcl=$PREFIX/root/tcl/lib --enable-threads --enable-64bit"
 
 common_fetch
 common_prereqs

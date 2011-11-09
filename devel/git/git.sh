@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="git"
-PKG_VERSION="1.7.6"
+PKG_VERSION="1.7.7.2"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://www.kernel.org/pub/software/scm/git/$TARBALL"
+URL="http://git-core.googlecode.com/files/$TARBALL"
 PREREQS="openssl perl curl make expat tcl tk"
 
 export CC=gcc

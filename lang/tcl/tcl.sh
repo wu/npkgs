@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="tcl"
-PACKAGE="${PKG_NAME}8.5.8"
+PACKAGE="${PKG_NAME}8.5.10"
 TARBALL="$PACKAGE-src.tar.gz"
 URL="http://prdownloads.sourceforge.net/tcl/$TARBALL"
 
@@ -36,6 +36,7 @@ fi
 common_configure
 common_make
 common_install
+common_make install-private-headers
 
 common_install_links
 
