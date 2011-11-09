@@ -2,6 +2,10 @@
 
 function common_untar
 {
+    echo
+    echo UNTAR
+    echo
+
     TARPATH="$DISTFILES/$TARBALL"
 
     if [ ! -r $TARPATH ]; then
@@ -20,6 +24,9 @@ function common_untar
 
 function common_untar_bzip
 {
+    echo
+    echo UNTAR BZIP
+    echo
     TARPATH="$DISTFILES/$TARBALL"
 
     if [ ! -r $TARPATH ]; then
@@ -38,6 +45,9 @@ function common_untar_bzip
 
 function common_unzip
 {
+    echo
+    echo UNZIP...
+    echo
     TARPATH="$DISTFILES/$TARBALL"
 
     if [ ! -r $TARPATH ]; then
@@ -56,6 +66,9 @@ function common_unzip
 
 function common_fetch
 {
+    echo
+    echo FETCHING...
+    echo
     # acquire tarball
     if [ ! -r "$DISTFILES/$TARBALL" ]; then
         echo "ACQUIRING TARBALL: $TARBALL..."
@@ -69,6 +82,9 @@ function common_fetch
 
 function common_clean
 {
+    echo
+    echo CLEAN...
+    echo
     # remove previous build
     if [ -d "work" ]; then
         echo "removing previous build"
@@ -78,7 +94,8 @@ function common_clean
 
 function common_prereqs
 {
-    echo "Checking if package is already installed"
+    echo
+    echo "PREREQS: Checking if package is already installed: $PKG_PREFIX"
     echo
     if [ -d "$PKG_PREFIX" ]; then
         echo "ERROR: Package already installed in $PKG_PREFIX"
@@ -114,8 +131,7 @@ function common_prereqs
 function common_configure
 {
     echo
-    echo
-    echo "CONFIGURING: $CONFIGURE"
+    echo "CONFIGURE: $CONFIGURE"
     echo
     $CONFIGURE                           || exit
 
@@ -125,7 +141,7 @@ function common_make
 {
     echo
     echo
-    echo "Building: $MAKE"
+    echo "MAKE: $MAKE"
     echo
     $MAKE $@                             || exit
 }
@@ -133,14 +149,17 @@ function common_make
 function common_test
 {
     echo
-    echo
-    echo "Testing: $MAKE test"
+    echo "TESTING: $MAKE test"
     echo
     $MAKE test                           || exit
 }
 
 function common_install
 {
+    echo
+    echo INSTALL
+    echo
+
     if [ ! -z "$BACKUP" ]; then
         echo
         echo
@@ -163,6 +182,9 @@ function common_install
 
 function common_patch
 {
+    echo
+    echo PATCH
+    echo
     PATCH=$1
     [ -z "$PATCH" ] && echo no patch specified && exit 1
 
@@ -181,6 +203,9 @@ function common_patch
 
 function common_install_links
 {
+    echo
+    echo INSTALL LINKS
+    echo
     if [ ! -z "$NPKGS_CONTEXT" ]; then
       echo "Running in context of npkgs, no symlinks created"
       return;
