@@ -1,9 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="sqlite"
-PKG_VER="3.7.3"
-PACKAGE="$PKG_NAME-$PKG_VER"
-TARBALL="$PKG_NAME-amalgamation-$PKG_VER.tar.gz"
+PKG_VER="3070900"
+
+PACKAGE="$PKG_NAME-autoconf-$PKG_VER"
+TARBALL="$PACKAGE.tar.gz"
 URL="http://www.sqlite.org/$TARBALL"
 
 PREREQS="readline"
