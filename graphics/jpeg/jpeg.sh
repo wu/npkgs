@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="jpeg"
-PKG_VER="7"
+PKG_VER="8d"
 PACKAGE="${PKG_NAME}src.v$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://www.ijg.org/files/$TARBALL"

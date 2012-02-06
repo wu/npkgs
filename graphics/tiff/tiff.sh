@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="tiff"
-PACKAGE="$PKG_NAME-3.9.1"
+PACKAGE="$PKG_NAME-4.0.0"
 TARBALL="$PACKAGE.tar.gz"
 URL="ftp://ftp.remotesensing.org/pub/libtiff/$TARBALL"
 

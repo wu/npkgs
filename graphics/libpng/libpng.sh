@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="libpng"
-PACKAGE="$PKG_NAME-1.2.40"
+PACKAGE="$PKG_NAME-1.5.7"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://prdownloads.sourceforge.net/libpng/$TARBALL"
 
