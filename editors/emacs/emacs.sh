@@ -1,14 +1,14 @@
 #!/bin/bash
 
 PKG_NAME="emacs"
-PACKAGE="$PKG_NAME-22.3"
+PACKAGE="$PKG_NAME-24.0.93"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
+URL="http://alpha.gnu.org/gnu/emacs/pretest/$TARBALL"
+#URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
+PREREQS="libpng libungif jpeg tiff"
 
 # source common envs
 . ../../common.sh
-
-CONFIGURE="$CONFIGURE --with-x"
 
 common_fetch
 common_prereqs
@@ -17,6 +17,19 @@ common_untar
 
 # build and install
 cd $PACKAGE                          || exit
+
+if [ "$OS" = "Darwin" ]; then
+    #echo
+    #echo "Patching for OS X"
+    #echo "https://github.com/mxcl/homebrew/issues/4650"
+    #echo
+    #$PATCHCMD src/unexmacosx.c < ../../files/unexmacosx.c.patch || exit
+
+    CONFIGURE="$CONFIGURE --with-ns"
+else
+
+    CONFIGURE="$CONFIGURE --with-x"
+fi
 
 common_configure
 common_make
