@@ -1,10 +1,11 @@
 #!/bin/bash
 
 PKG_NAME="rrdtool"
-PACKAGE="$PKG_NAME-1.4.3"
+PACKAGE="$PKG_NAME-1.4.7"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://oss.oetiker.ch/rrdtool/pub/$TARBALL"
-PREREQS="imlib2 freetype2 libart gettext pkg-config cairo pango"
+#PREREQS="imlib2 freetype2 libart gettext pkg-config cairo pango"
+PREREQS="imlib2 freetype2"
 
 # source common envs
 . ../../common.sh

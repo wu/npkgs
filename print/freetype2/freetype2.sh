@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="freetype2"
-PACKAGE="freetype-2.3.11"
+PACKAGE="freetype-2.4.8"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://download.savannah.gnu.org/releases/freetype/$TARBALL"
 
