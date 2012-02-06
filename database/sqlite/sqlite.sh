@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="sqlite"
-PKG_VER="3070900"
+PKG_VER="3071000"
 
 PACKAGE="$PKG_NAME-autoconf-$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
@@ -20,7 +20,7 @@ common_untar
 # build and install
 cd $PACKAGE                           || exit
 
-common_configure
+common_configure -DSQLITE_MAX_EXPR_DEPTH=5000
 common_make
 common_install
 common_install_links
