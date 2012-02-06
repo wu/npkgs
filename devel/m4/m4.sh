@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="m4"
-PACKAGE="$PKG_NAME-1.4.12"
+PACKAGE="$PKG_NAME-1.4.16"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/gnu/m4/$TARBALL"
 
