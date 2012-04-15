@@ -135,7 +135,7 @@ if [ -z "$PATCHCMD" ]; then
 fi
 
 # build options
-export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
+export LDFLAGS="-L$PREFIX/lib -R$PREFIX/lib $LDFLAGS"
 export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
 export CFLAGS="-I$PREFIX/include $CFLAGS"
 export CXXFLAGS="-I$PREFIX/include $CXXFLAGS"
