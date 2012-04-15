@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="subversion"
-PACKAGE="$PKG_NAME-1.7.3"
+PACKAGE="$PKG_NAME-1.7.4"
 TARBALL="$PACKAGE.tar.bz2"
 URL="http://mirror.atlanticmetro.net/apache/subversion/$TARBALL"
 PREREQS="swig neon libiconv apache"
