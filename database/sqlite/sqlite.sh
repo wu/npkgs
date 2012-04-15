@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="sqlite"
-PKG_VER="3071000"
+PKG_VER="3071100"
 
 PACKAGE="$PKG_NAME-autoconf-$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
