@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="nagios"
-PACKAGE="$PKG_NAME-3.2.0"
+PACKAGE="$PKG_NAME-3.4.1"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://prdownloads.sourceforge.net/sourceforge/$PKG_NAME/$TARBALL"
 PREREQS="make"
@@ -29,7 +29,8 @@ common_clean
 common_untar
 
 # build and install
-cd $PACKAGE                          || exit
+#cd $PACKAGE                          || exit
+cd nagios                          || exit
 
 common_configure
 
