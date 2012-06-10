@@ -1,10 +1,9 @@
 #!/bin/bash
 
 PKG_NAME="emacs"
-PACKAGE="$PKG_NAME-24.0.93"
+PACKAGE="$PKG_NAME-24.1"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://alpha.gnu.org/gnu/emacs/pretest/$TARBALL"
-#URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
+URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
 PREREQS="libpng libungif jpeg tiff"
 
 # source common envs
