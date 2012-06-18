@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="gzip"
-PACKAGE="$PKG_NAME-1.3.9"
+PACKAGE="$PKG_NAME-1.5"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/gzip/$TARBALL"
 
