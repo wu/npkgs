@@ -72,6 +72,10 @@ function common_fetch
     # acquire tarball
     if [ ! -r "$DISTFILES/$TARBALL" ]; then
         echo "ACQUIRING TARBALL: $TARBALL..."
+        if [ -r "$TARBALL" ]; then
+            echo "Removing previously attempted download file"
+            rm $TARBALL;
+        fi
         $WGET $URL
         mv $TARBALL $DISTFILES/
     else
