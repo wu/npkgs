@@ -147,10 +147,14 @@ Second, remove any symlinks that pointed to this package, i.e. the dead symlinks
 
 SOLARIS AND OPENSOLARIS
 
-You will need to adjust your library paths.  This can be done by
-creating your own private ld.config file.  Run 'crle' without any
-arguments to determine the current library paths, and then add
-$NPKG_PREFIX.  There is no need to do this as root.
+You may need to adjust your library paths.  LD_RUN_PATH is now getting
+set properly, so everything may work just fine without having to
+create your own private ld.config file.  The information is here in
+case you need it.
+
+Run 'crle' without any arguments to determine the current library
+paths, and then add $NPKG_PREFIX.  There is no need to do this as
+root.
 
   export NPKG_PREFIX=/usr/local
   crle -c $NPKG_PREFIX/ld.config -l /lib:/usr/lib:$NPKG_PREFIX/lib -i /lib -i /usr/lib -i $NPKG_PREFIX/lib
