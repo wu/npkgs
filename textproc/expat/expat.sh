@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="expat"
-PKG_VERSION="2.0.1"
+PKG_VERSION="2.1.0"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://downloads.sourceforge.net/project/expat/expat/$PKG_VERSION/$TARBALL"

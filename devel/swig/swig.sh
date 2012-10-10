@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="swig"
-PACKAGE="$PKG_NAME-2.0.4"
+PACKAGE="$PKG_NAME-2.0.8"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://downloads.sourceforge.net/project/swig/swig/$PACKAGE/$TARBALL"
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="emacs"
-PACKAGE="$PKG_NAME-24.1"
+PACKAGE="$PKG_NAME-24.2"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://ftp.gnu.org/pub/gnu/emacs/$TARBALL"
 PREREQS="libpng libungif jpeg tiff"

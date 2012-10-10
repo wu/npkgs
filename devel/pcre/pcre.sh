@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="pcre"
-PKG_VER="8.20"
+PKG_VER="8.31"
 PACKAGE="$PKG_NAME-$PKG_VER"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://downloads.sourceforge.net/project/pcre/pcre/$PKG_VER/$TARBALL"

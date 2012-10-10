@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="tcl"
-PACKAGE="${PKG_NAME}8.5.10"
+PACKAGE="${PKG_NAME}8.5.12"
 TARBALL="$PACKAGE-src.tar.gz"
 URL="http://prdownloads.sourceforge.net/tcl/$TARBALL"
 
