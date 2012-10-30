@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="git"
-PKG_VERSION="1.7.12.3"
+PKG_VERSION="1.7.12.4"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://git-core.googlecode.com/files/$TARBALL"
