@@ -43,6 +43,27 @@ function common_untar_bzip
     fi
 }
 
+function common_untar_xz
+{
+    echo
+    echo UNTAR XZ
+    echo
+    TARPATH="$DISTFILES/$TARBALL"
+
+    if [ ! -r $TARPATH ]; then
+        echo ERROR: no tarball found: $TARPATH
+        exit 1
+    fi
+
+    mkdir work && cd work
+
+    echo "xzcat $TARPATH | $TAR -xvf -"
+    if ! xzcat "$TARPATH" | $TAR -xvf -
+    then
+        echo ERROR: untarring error
+    fi
+}
+
 function common_unzip
 {
     echo
@@ -192,16 +213,18 @@ function common_patch
     PATCH=$1
     [ -z "$PATCH" ] && echo no patch specified && exit 1
 
-    PATCHDIR="../../files/"
+    PATCHDIR="../../files"
     [ ! -r "$PATCHDIR/$PATCH" ] && echo no patch found: $PATCH && exit 1
+
+    PATCHFILE=$2
 
     # apply the patch
     echo
     echo
     echo APPLYING PATCH: $PATCH
     echo
-    echo $PATCHCMD \< "$PATCHDIR/$PATCH"
-    $PATCHCMD < "$PATCHDIR/$PATCH" || exit
+    echo $PATCHCMD $PATCHFILE \< "$PATCHDIR/$PATCH"
+    $PATCHCMD $PATCHFILE < "$PATCHDIR/$PATCH" || exit
     echo APPLIED!
 }
 

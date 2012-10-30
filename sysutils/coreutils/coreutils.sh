@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PKG_NAME="coreutils"
-PACKAGE="$PKG_NAME-8.3"
-TARBALL="$PACKAGE.tar.gz"
+PACKAGE="$PKG_NAME-8.19"
+TARBALL="$PACKAGE.tar.xz"
 URL="http://ftp.gnu.org/pub/gnu/coreutils/$TARBALL"
-PREREQ="patch"
+PREREQ="patch xz"
 
 # source common envs
 . ../../common.sh
@@ -15,22 +15,29 @@ export CC=gcc
 common_fetch
 common_prereqs
 common_clean
-common_untar
+common_untar_xz
 
 # build and install
 cd $PACKAGE                          || exit
 
-common_configure
-
-if [ "$OS" = "Darwin" ]
+# move APR's include file out of the way or it causes coreutils build to fail
+if [ "$OS" = "Darwin" -a -r $NPKG_PREFIX/include/ap_config_auto.h ]
 then
-  # hmm, weird, on my new OS X laptop, for some reason it's thinking i
-  # have BeOS (i.e. appears to be thinking i have OS.h?).  I do have an
-  # os.h in /usr/local/include that comes from apache.  perhaps this is
-  # the problem since the fs is case insensitive?
-  perl -pi -e's|HAVE_OS_H 1|HAVE_OS_H 0|' lib/config.h
+    echo
+    echo "BACKING UP: $NPKG_PREFIX/include/ap_config_auto.h"
+    mv $NPKG_PREFIX/include/ap_config_auto.h $NPKG_PREFIX/include/ap_config_auto.h.orig
 fi
+
+common_configure
 
 common_make
 common_install
 common_install_links
+
+# restore APR's include file after coreutil build/install is complete
+if [ -r $NPKG_PREFIX/include/ap_config_auto.h.orig ]
+then
+    echo
+    echo "RESTORING: $NPKG_PREFIX/include/ap_config_auto.h"
+    mv $NPKG_PREFIX/include/ap_config_auto.h.orig $NPKG_PREFIX/include/ap_config_auto.h
+fi
