@@ -1,9 +1,9 @@
 #!/bin/bash
 
 PKG_NAME="lftp"
-PACKAGE="$PKG_NAME-4.3.8"
+PACKAGE="$PKG_NAME-4.4.0"
 TARBALL="$PACKAGE.tar.gz"
-URL="http://ftp.yars.free.net/pub/source/lftp/$TARBALL"
+URL="http://ftp.yar.ru/pub/source/lftp/$TARBALL"
 PREREQS="openssl readline"
 
 # source common envs
