@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME="git-manpages"
-PKG_VERSION="1.8.0"
+PKG_VERSION="1.8.1.2"
 PACKAGE="$PKG_NAME-$PKG_VERSION"
 TARBALL="$PACKAGE.tar.gz"
 URL="http://git-core.googlecode.com/files/$TARBALL"
